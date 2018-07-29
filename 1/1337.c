@@ -19,8 +19,7 @@ int main() {
     int x1=1, x2=N, y1=1, y2=N;
     int num=-1;
     int x = x1, y = y2;
-    for (int i = N; i >= 1; i--) for (int j = 1; j <= N; j++) map[i][j] = 0;  
-     
+    for (int i = N; i >= 1; i--) for (int j = 1; j <= N; j++) map[i][j] = 0;       
     while (map[y][x] == 0) {
         x = x1, y = y2;
         while( (x<=x2)&&(y>=y1)){     
