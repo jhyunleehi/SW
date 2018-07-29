@@ -3,7 +3,7 @@
     User: jhyunlee
     Language: C++
     Result: Success
-    Time:2 ms
+    Time:1 ms
     Memory:1092 kb
 ****************************************************************/
  
@@ -22,21 +22,15 @@ int main() {
         if ((S < 2 || S>9) || (E < 2 || E>9)) {
             printf("INPUT ERROR!\n");
         }
-        else {
-            if (S > E) K = -1; else  K = 1;
-            if (S == E) {
-                for (int i = 1; i <= 9; i++) {
-                    printf("%d * %d = %2d\n", S, i, S*i);
+        else
+        {
+            for (int i = 1; i <= 9; i++) {
+                for (int j = S; (S < E) ? j <= E : j >= E; (S < E) ? j++ : j--) {
+                    printf("%d * %d = %2d   ", j, i, j*i);
                 }
+                printf("\n");
             }
-            else {
-                for (int i = 1; i <= 9; i++) {
-                    for (int j = S; (S < E) ? j <= E : j >= E; j += K) {
-                        printf("%d * %d = %2d   ", j, i, j*i);
-                    }
-                    printf("\n");
-                }
-            }
-        }       
+        }
+ 
     }
 }
