@@ -1,13 +1,4 @@
-/**************************************************************
-    Problem: 1291
-    User: jhyunlee
-    Language: C++
-    Result: Success
-    Time:1 ms
-    Memory:1092 kb
-****************************************************************/
- 
- 
+
 #include <stdio.h>
 #include<malloc.h>
  
