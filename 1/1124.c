@@ -99,46 +99,10 @@ int main() {
             }
         }
     }
-    /*
-    for (int y = boxy - 1; y >= 0; y--) {
-        for (int x = 0; x < boxx; x++)
-            printf("[%d]", map[y][x]);
-        printf("\n");
-    }   
-    printf("\n");
-    */
-    /*
-    for (int y = 0; y < boxy; y++) {
-        for (int x = 0; x < boxx; x++) {
-            bool good = true;
-            int sum = 0;
-            for (int i = y; i < boxy; i++) {
-                for (int j = x; j < boxx; j++)
-                    if (map[i][j] == 0) {
-                        good = false;
-                        break;
-                    }
-                    else {
-                        sum += map[i][j];
-                        if ((good) && (result[i][j] < sum)) result[i][j] = sum;
-                    }
-                     
-            }
-        }
-    }
- 
-    for (int y = boxy - 1; y >= 0; y--) {
-        for (int x = 0; x < boxx; x++)
-            printf("[%d]", result[y][x]);
-        printf("\n");
-    }
-    */
  
     int maxsize = 0;
     for (int y = 0; y<boxy ; y++) {
-        for (int x = 0; x<boxx ; x++) {                      
-    //for (int y = 1; y==1; y++) {
-        //for (int x = 0; x==0; x++) {
+        for (int x = 0; x<boxx ; x++) {                          
             for (int i = y; i < boxy; i++) {
                 for(int j=x; j < boxx; j++){
                     bool outbox = false;
@@ -165,15 +129,7 @@ int main() {
  
         }
     }
-    /*
-    for (int y = boxy - 1; y >= 0; y--) {
-        for (int x = 0; x < boxx; x++)
-            printf("[%d]", result[y][x]);
-        printf("\n");
-    }
-    */
+    
     printf("%d\n", maxsize);
- 
-                     
     return 1;
 }
