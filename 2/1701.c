@@ -5,45 +5,42 @@
 int main() {
 	char* str;
 	int N = 0;
-	str = (char*)malloc(sizeof(char) * 501);
-	int *M = (int *)malloc(sizeof(int) * 501);
+	str = (char*)malloc(sizeof(char) * 501);	
 	freopen("data.txt", "r", stdin);
 	scanf("%s", str);
 	while (*(str + N) != NULL) N++;
-	for (int i = 0; i < N; i++) *(M + i) = 0;
-	//printf("%d", N);
-
-	for (int i = 1; i < N; i++) {
-		for (int j = i-1; j >= 0; j--) {
-			if (*(M + j) != 0) {
-				continue;
-			} else if (*(str + i) == 't' && *(str + j) == 'a'){
-				*(M + i) = (i - j) + 1;
-				*(M + j) = (i - j) + 1;
-				break;
-			} else if  (*(str + i) == 'c' && *(str + j) == 'g') {
-				*(M + i) = (i - j) + 1;
-				*(M + j) = (i - j) + 1;
-				break;
-			}
-			else if (*(M + j) == 0) {
-				break;
-			}
-		}
-		//for (int k = 0; k < N; k++) printf("[%d]", *(M + k)); printf("\n");
-	}
+	int **DM = (int**)malloc(sizeof(int*)*N + 1);
+	for (int i = 0; i < N; i++) *(DM + i) = (int*)malloc(sizeof(int)*N + 1);
+	for (int i = 0; i < N; i++)	for(int j=0; j<N; j++)	*(*(DM + i)+j) = 0;
+	
+	//*(*(DM + j) + i) j에서 i까지에서 연속된 최대값
+	int max = 0;
 	int ans = 0;
-	int i = 0;
-	int s = 0;
-	while(i<N){
-		if (*(M + i) != 0) {
-			if (ans < ((i - s) + 1)) ans = (i - s) + 1;
+	for (int i = 1; i < N; i++) {
+		for (int j = i-1; j >=0; j--) {
+			if ( ((*(str + j) == 'a')&&(*(str + i) == 't'))  ||
+				 ((*(str + j) == 'g') && (*(str + i) == 'c')) )
+			{
+				*(*(DM + j) + i) = *(*(DM + j + 1) + i - 1) + 2;
+			}
+			max = 0;
+			for (int k = j ; k <= i - 1; k++) {
+				int a = *(*(DM+j)+k);
+				int b = *(*(DM + (k+1)) + i);
+				max = (a+b > max) ? a+b : max;
+			}
+			*(*(DM + j) + i) = (max > *(*(DM + j) + i)) ? max : *(*(DM + j) + i);
+			ans = (*(*(DM + j) + i) > ans) ? *(*(DM + j) + i) : ans;
 		}
-		if (*(M + i) == 0) {		
-			s = i+1;
-		}		
-		i++;
-	}
+		/*
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++)
+				printf("[%d]", *(*(DM + i) + j));
+			printf("\n");
+		}	
+		printf("------------------------\n");
+		*/
+		
+	}	
 	printf("%d\n", ans);
-
 }
