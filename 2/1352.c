@@ -139,10 +139,7 @@ int main() {
     btree->R = NULL;
     call(0, 0);
     //btree_print(&btree);
- 
-    //int length = 0;
-    //while (*(Map + length) != 0) length++;
-    //qsort(0, length -1);
+
     for (int i = 0; i < M; i++) {
         if ( btree_find(&btree, *(G + i)) ) 
             printf("Y ");
