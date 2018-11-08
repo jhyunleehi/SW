@@ -66,7 +66,7 @@ int main() {
 	mQue->head = NULL;
 	mQue->tail = NULL;
 	int visit[101][101] = { 0, };
-	int dx[8] = {-2, -1, 1, 2, 2, 1, -1, -1};
+	int dx[8] = {-2, -1, 1, 2, 2, 1, -1, -2};
 	int dy[8] = {-1, -2, -2, -1, 1, 2, 2, 1};
 	int y,x, ny, nx;
 	int step = 0;
