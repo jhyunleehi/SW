@@ -76,6 +76,7 @@ int is_prime(int N) {
         prime_array[N] = 1;
         return 1; //true;
     }
+    if(n%2==0) return 0;
     for (int i = 3; i*i <= 9999; i+=2) {        
             if (N%i == 0) return 0; //false;        
     }
