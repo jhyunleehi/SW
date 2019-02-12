@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNING
-#define MAX_X 15
-#define MAX_Y 15
+#define MAX_X 10
+#define MAX_Y 10
 
 #include<stdio.h>
 #include<malloc.h>
