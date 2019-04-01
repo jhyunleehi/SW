@@ -2,8 +2,6 @@
 #include<stdio.h>
 #include<malloc.h>
 
-
-
 int main() {
 	int min = 0x7FFFFFFF;
 	int N[4] = { 0, };
@@ -20,12 +18,6 @@ int main() {
 		if (temp < min) min = temp;	
 	}
 	int stop = min;
-
-	k = 0;
-	for (int j = 1000; j >= 1; j = j / 10) {
-		M[k] = temp / j;
-		temp = temp - M[k++] * j;
-	}
 
 	cnt = 0;
 	for (int i = 1111; i <= 9999; i++) {
