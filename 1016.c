@@ -29,19 +29,12 @@ int main() {
 			c++;
 		}
 	}
-
-	//for (int i = 0; i < N; i++)	printf("[%d] ", *(list + i)); printf("\n");
-	//for (int i = 0; i < N; i++)	printf("[%d] ", *(map + i)); printf("\n");
-
 	for (int i = 0; i < N; i++) {
 		if (*(map + i) != *(list + i)) {
 			for (int k = 0; k < N; k++) {
-				if ((*(list + i) == *(map + k)) && (*(list + k) == *(map + i))) {
-					//printf("swap: %d %d\n", i, k);
+				if ((*(list + i) == *(map + k)) && (*(list + k) == *(map + i))) {					
 					swap((list + i), (list + k));
 					count++;
-					//for (int i = 0; i < N; i++)	printf("%d", *(list + i)); printf("\n");
-					//for (int i = 0; i < N; i++)	printf("%d", *(map + i)); printf("\n");
 					break;
 				}
 			}
@@ -50,12 +43,9 @@ int main() {
 	for (int i = 0; i < N; i++) {
 		if (*(map + i) != *(list + i)) {
 			for (int k = i + 1; k < N; k++) {
-				if ((*(map + i) == *(list + k))&&(*(map + k) != *(list + k))) {					
-					//printf("swap: %d %d\n", i, k);
+				if ((*(map + i) == *(list + k))&&(*(map + k) != *(list + k))) {										
 					swap((list + i), (list + k));
 					count++;
-					//for (int i = 0; i < N; i++)	printf("%d", *(list + i)); printf("\n");
-					//for (int i = 0; i < N; i++)	printf("%d", *(map + i)); printf("\n");
 					break;
 				}
 			}
