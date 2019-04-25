@@ -1,35 +1,65 @@
 #define _CRT_SECURE_NO_WARNINGS
-
 #include<stdio.h>
 #include<malloc.h>
+void swap(int *a, int *b) {
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
 int main() {
-	int M[1001];
-	int N = 0;
+	int N;
+	int *list;
+	int *map;
+	int C[4] = { 0, };
+	int count = 0;
 	freopen("Text.txt", "r", stdin);
 	scanf("%d", &N);
-	for (int i = 1; i <= N; i++) {
-		scanf("%d", &M[i]);
+	list = (int*)malloc(sizeof(int)*N + 1);
+	map = (int*)malloc(sizeof(int)*N + 1);
+	for (int i = 0; i < N; i++)
+		scanf("%d", (list + i));
+	for (int i = 0; i < N; i++) {
+		C[*(list + i)]++;
 	}
-	int i = 1;
-	int k = N;
-	int cnt = 0;
-	while (i < k) {
-		i = 1;
-		while (M[i] <= M[i + 1]) i++;
-		k = N;
-		while (M[k] >= M[i]) k--;
-		if (i < k) {
-			int temp = M[i];
-			M[i] = M[k];
-			M[k] = temp;
-			cnt++;
+	int c = 0;
+	for (int i = 1; i <= 3; i++) {
+		for (int j = 0; j < C[i]; j++) {
+			*(map + c) = i;
+			c++;
 		}
-
-		for (int j = 1; j <= N; j++) {
-			printf("[%d]", M[j]);
-		}
-		printf("\n");
 	}
 
+	//for (int i = 0; i < N; i++)	printf("[%d] ", *(list + i)); printf("\n");
+	//for (int i = 0; i < N; i++)	printf("[%d] ", *(map + i)); printf("\n");
+
+	for (int i = 0; i < N; i++) {
+		if (*(map + i) != *(list + i)) {
+			for (int k = 0; k < N; k++) {
+				if ((*(list + i) == *(map + k)) && (*(list + k) == *(map + i))) {
+					//printf("swap: %d %d\n", i, k);
+					swap((list + i), (list + k));
+					count++;
+					//for (int i = 0; i < N; i++)	printf("%d", *(list + i)); printf("\n");
+					//for (int i = 0; i < N; i++)	printf("%d", *(map + i)); printf("\n");
+					break;
+				}
+			}
+		}
+	}
+	for (int i = 0; i < N; i++) {
+		if (*(map + i) != *(list + i)) {
+			for (int k = i + 1; k < N; k++) {
+				if ((*(map + i) == *(list + k))&&(*(map + k) != *(list + k))) {					
+					//printf("swap: %d %d\n", i, k);
+					swap((list + i), (list + k));
+					count++;
+					//for (int i = 0; i < N; i++)	printf("%d", *(list + i)); printf("\n");
+					//for (int i = 0; i < N; i++)	printf("%d", *(map + i)); printf("\n");
+					break;
+				}
+			}
+		}
+	}
+	printf("%d\n", count);
 }
- 
