@@ -5,7 +5,7 @@
 #include<stdio.h>
 #include<malloc.h>
  
-int main () {
+int main () { 
     int x=0, y=0;
     int a, b, c;    
     //freopen("input.dat", "r", stdin);
