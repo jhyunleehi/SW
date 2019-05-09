@@ -14,7 +14,7 @@ int main() {
     int *num = (int*)malloc(sizeof(int)*(cnt + 1));
     for (int i = 0; i < cnt; i++) {
         scanf("%d", (num + i));
-        sum += *(num + i);      
+        sum += *(num + i);       
     }
      
     avg = floor((sum*1.0 / cnt*1.0) * 10.0 + 0.5) / 10.0;
