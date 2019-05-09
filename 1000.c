@@ -17,4 +17,4 @@ int main() {
     //freopen("data.txt", "r", stdin);
     scanf("%d %d", &a, &b);
     printf("%d\n", a + b);
-}
+} 
