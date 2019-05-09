@@ -2,7 +2,7 @@
 #define leapyear(year) ((year)%4==0 && ( (year)%100!=0 || (year)%400==0 )) //윤년판정매크로
 
 int main(void)
-{
+{ 
     int year, month;// 연도와 월을 저장할 변수
     int totalday[]={0,31,28,31,30,31,30,31,31,30,31,30,31};// 각 달의 총일 수 (첫번째 수는 제외)
     int lastyear, day, i;
