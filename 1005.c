@@ -13,7 +13,7 @@ int isPrimeNum(int N) {
  
 int main() {
     int M;
-    int *N;
+    int *N; 
     int max_prime = 0;;
     int prime_num=0;
     int last;
