@@ -8,6 +8,8 @@ int map[51][51][51] = { 0, };
 void call(int *M, int N, int A, int B, int C, int *max) {
 	if (map[A][B][C] != 0) return;
 	map[A][B][C] = 1;
+	map[B][C][A] = 1;
+	map[C][A][B] = 1;
 	printf("%d %d %d :%d\n", A, B, C, *max);
 	if ((A >= N) || (B >= N) || (C >= N)) return;
 	if ((A != B) && (B != C) && (A != C)) {
