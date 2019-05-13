@@ -2,11 +2,17 @@
 #include<stdio.h>
 #include<malloc.h>
 
-typedef struct heap *pheap;
+typedef struct node *pnode;
+typedef struct node {
+	int num;
+	pnode L;
+	pnode R;
+};
+
+typedef struct heap *ph;
 typedef struct heap {
-	int N[500001];
-	int dir; //1: up, 2: down	
-	int head;
+	int M[500000 + 1];
+	int root;
 	int tail;
 };
 void swap(int *A, int *B) {
@@ -15,79 +21,111 @@ void swap(int *A, int *B) {
 	*B = temp;
 }
 
-void addheap(struct heap *php, int n, int dir) {
-	printf("addheap: %d\n", n);
-	if (php->tail == 0) {
-		php->tail = php->head = 1;;
-		php->N[php->tail] = n;
+void printheap(struct heap *ph) {
+	for (int i = 1; i <= ph->tail; i++) {
+		printf("[%d]", ph->M[i]);
+	}
+	printf("\n");
+}
+
+void addheap(struct heap *ph, int in, int dir) {
+	if (ph->tail == 0) {
+		ph->root = ph->tail = 1;
+		ph->M[ph->tail] = in;
 	}
 	else {
-		php->tail++;
-		php->N[php->tail] = n;
+		ph->tail++;
+		ph->M[ph->tail] = in;
 	}
-	int down = php->tail;
-	int up = (php->tail) / 2;
-	while (down > 1) {
+	int pnode = ph->tail / 2;
+	int cnode = ph->tail;
+	while (pnode >= 1) {
 		if (dir == 1) {
-			if (php->N[up] > php->N[down]) {
-				swap(&php->N[up], &php->N[down]);
+			if (ph->M[pnode] > ph->M[cnode]) {
+				swap(&ph->M[pnode], &ph->M[cnode]);
+				cnode = pnode;
+				pnode = pnode / 2;
+			}
+			else {
+				break;
 			}
 		}
 		if (dir == 2) {
-			if (php->N[up] < php->N[down]) {
-				swap(&php->N[up], &php->N[down]);
+			if (ph->M[pnode] < ph->M[cnode]) {
+				swap(&ph->M[pnode], &ph->M[cnode]);
+				cnode = pnode;
+				pnode = pnode / 2;
+			}
+			else {
+				break;
 			}
 		}
-		down = up;
-		up = up / 2;
+
 	}
 }
-
-int getheap(struct heap *php,int dir) {
-	int temp = php->N[1];
-	if (php->tail <= 0) return -1;
-	php->N[1] = php->N[php->tail];
-	php->N[php->tail] = 0;
-	php->tail--;
-	int up = 1;
-	int down = php->tail;
-	while (up < down) {
-		int key = -1;
+void getheap(struct heap *ph, int dir) {
+	if (ph->root > ph->tail) return;
+	printf("%d\n", ph->M[ph->root]);
+	ph->M[ph->root] = ph->M[ph->tail];
+	ph->M[ph->tail] = 0;
+	ph->tail--;
+	int pnode = ph->root;
+	int Lnode = pnode * 2;
+	int Rnode = pnode * 2 + 1;
+	int pri;
+	while ((pnode * 2) < ph->tail) {
+		if (Rnode <= ph->tail) {
+			if (dir == 1)	pri = (ph->M[Lnode] <= ph->M[Rnode]) ? Lnode : Rnode;
+			if (dir == 2)	pri = (ph->M[Lnode] >= ph->M[Rnode]) ? Lnode : Rnode;
+		}
+		else if ((Rnode > ph->tail) && (Lnode <= ph->tail)) {
+			pri = Lnode;
+		}
 		if (dir == 1) {
-			for (int i = 0; i <= 1; i++) {
-				if ((php->N[up] > php->N[up * 2 + i]) && (up * 2 + i < php->tail)) {
-					swap(&php->N[up], &php->N[up * 2 + i]);					
-					key = i;
-				}
+			if (ph->M[pnode] > ph->M[pri]) {
+				swap(&ph->M[pnode], &ph->M[pri]);
+				pnode = pri;
+				Lnode = pnode * 2;
+				Rnode = pnode * 2 + 1;
 			}
-		} else if (dir == 2) {
-			for (int i = 0; i <= 1; i++) {
-				if ((php->N[up] < php->N[up * 2 + i]) && (up * 2 + i < php->tail)) {
-					swap(&php->N[up], &php->N[up * 2 + i]);									
-					key = i;
-				}
+			else {
+				break;
 			}
-		} 
-		if (key == 0) up = up * 2;
-		if (key == 1) up = up * 2+1;
-		if (key == -1) break;
+		}
+		if (dir == 2) {
+			if (ph->M[pnode] < ph->M[pri]) {
+				swap(&ph->M[pnode], &ph->M[pri]);
+				pnode = pri;
+				Lnode = pnode * 2;
+				Rnode = pnode * 2 + 1;
+			}
+			else {
+				break;
+			}
+		}
+
+
 	}
-	return temp;
 }
 
 int main() {
 	freopen("data.txt", "r", stdin);
-	struct heap *myheap = (struct heap*)(malloc(sizeof(struct heap)));	
-	myheap->head = myheap->tail = 0;
-
 	int N, dir;
 	int in;
 	scanf("%d %d", &N, &dir);
+	struct heap *ph = (struct heap *)(malloc(sizeof(struct heap)));
+	ph->root = 0;
+	ph->tail = 0;
+	ph->M[0] = 0;
 	for (int i = 0; i < N; i++) {
 		scanf("%d", &in);
-		addheap(myheap, in, dir);
+		addheap(ph, in, dir);
+		//printheap(ph);
 	}
 	for (int i = 0; i < N; i++) {
-		printf("%d\n", getheap(myheap,dir));
+		getheap(ph,dir);
+		//printheap(ph);
 	}
+
 }
+
