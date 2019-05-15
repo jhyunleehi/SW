@@ -104,7 +104,7 @@ int main() {
 	for (int i = 1; i <= N; i++) {
 		for (int j = 1; j <= N; j++) {
 			scanf("%d", &M[i][j]);
-			C[i][j] = 1000;
+			C[i][j] = 0x7FFFFFFF;
 		}
 	}
 	struct queue *pq = (struct queue*)malloc(sizeof(struct queue));
