@@ -5,20 +5,47 @@
 
 int N, A, B;
 void call_dfs(int **M, int **C, int **V, int y, int x) {
-	printf("call: %d %d \n", y, x);
+	//printf("call: %d %d \n", y, x);
 	int ny, nx;
-	int h1, t1, t2;
+	int h1, t1, t2;	
 	int dy[] = { 0,-1,0,1 };
 	int dx[] = { -1,0,1,0 };
 	*(*(V + y) + x) = 1;
+	int dm[4][2] = { 0x7FFFFFFF, };
 	for (int i = 0; i < 4; i++) {
 		ny = y + dy[i];
-		nx = x + dx[i];		
+		nx = x + dx[i];
+		dm[i][0] = i;
+		if ((ny >= 1) && (ny <= N) && (nx >= 1) && (nx <= N)) {
+			h1 = *(*(M + y) + x) - *(*(M + ny) + nx);			
+			if ((h1 > 0)) dm[i][1] = h1 * h1;
+			if ((h1 < 0)) dm[i][1] = h1 * -1;
+			if ((h1 == 0)) dm[i][1] = 0;		
+		}
+	}
+	for (int i = 0; i < 4-1; i++) {
+		for (int j = i; j < 4; j++) {
+			if (dm[i][1] > dm[j][1]) {
+				t1 = dm[i][0];
+				t2 = dm[i][1];
+				dm[i][0] = dm[j][0];
+				dm[i][1] = dm[j][1];
+				dm[j][0] = t1;
+				dm[j][1] = t2;
+			}
+		}
+	}
+	//for (int i = 0; i < 4; i++) printf("[%d][%d]-", dm[i][0], dm[i][1]);
+	//printf("\n");
+
+	for (int i = 0; i < 4; i++) {
+		ny = y + dy[dm[i][0]];
+		nx = x + dx[dm[i][0]];		
 			if ((ny >= 1) && (ny <= N) && (nx >= 1) && (nx <= N)) {
 				h1 = *(*(M + y) + x) - *(*(M + ny) + nx);
 				t1 = *(*(C + ny) + nx);
 				t2 = *(*(C + y) + x);
-				if ( *(*(V+ny)+nx) == 0 ) {
+				//if ( *(*(V+ny)+nx) == 0 ) {
 					if ((h1 > 0) && (t1 > h1*h1 + t2)) {
 						*(*(C + ny) + nx) = h1 * h1 + t2;
 						call_dfs(M, C, V, ny, nx);
@@ -31,7 +58,7 @@ void call_dfs(int **M, int **C, int **V, int y, int x) {
 						*(*(C + ny) + nx) = t2;
 						call_dfs(M, C, V, ny, nx);
 					}
-				}
+				//}
 			}
 		
 	}
