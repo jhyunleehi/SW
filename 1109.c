@@ -50,6 +50,35 @@ void list_add(struct list *mylist, int no) {
 	}
 }
 
+void tsort(char *t1, char *t2, char *t3) {
+	char temp;
+	if (*t1 < *t2) {
+		temp = *t2;
+		*t2 = *t1;
+		*t1 = temp;
+	}
+	if (*t1 < *t3) {
+		temp = *t3;
+		*t3 = *t1;
+		*t1 = temp;
+	}
+	if (*t2 < *t3) {
+		temp = *t3;
+		*t3 = *t2;
+		*t2 = temp;
+	}
+}
+bool find(char mylist[][3], int s, int e, int t1) {
+	if (s > e) return false;
+	int mid = (s+e) / 2;
+	if (mylist[mid][0] == t1) return true;
+	if (mylist[mid][0] < t1)
+		return find(mylist, s, mid-1, t1);
+	else
+		return find(mylist, mid+1,e, t1);
+}
+
+
 int main() {
 	freopen("data.txt", "r", stdin);
 	int N;
@@ -63,29 +92,14 @@ int main() {
 	for (int a = 1; a < N; a++) {
 		for (int b = 1; b < N - a; b++) {
 			int c = (N - (a + b));
-			if((a>= b+c) || (b>=a+c)||(c>=a+b)) continue;			
-			if ((a >= b)&&(b>=c)) {
-				t1 = a;	t2 = b;	t3 = c;
-			}
-			else if ((b >= a) && (a >= c)) {
-				t1 = b;	t2 = a;	t3 = c;
+			if((a>= b+c) || (b>=a+c)||(c>=a+b)) continue;
+			t1 = a; t2 = b; t3 = c;
+			tsort(&t1, &t2, &t3);
 
-			} else if((b >= c) && (c >= a)){
-				t1 = b;	t2 = c;	t3 = a;
-			}
-			else if ((b >= a) && (a >= c)) {
-				t1 = b;	t2 = a;	t3 = c;
-			}
-			else if ((c >= b) && (b >= a)) {
-				t1 = c;	t2 = b;	t3 = a;
-			}else if ((c >= a) && (a >= b)) {
-				t1 = c;	t2 = a;	t3 = b;
-			}
-			
 			int i = 0;
-			while(mylist[i][0]!= 0){
+			while (mylist[i][0] != 0) {
 				if ((mylist[i][0] == t1) && (mylist[i][1] == t2) && (mylist[i][2] == t3))
-					break;				
+					break;
 				i++;
 			}
 			if (mylist[i][0] == 0) {
@@ -93,8 +107,18 @@ int main() {
 				mylist[i][1] = t2;
 				mylist[i][2] = t3;
 				cnt++;
-				//printf("%d %d %d\n", t1, t2, t3);
+				printf("%d %d %d\n", t1, t2, t3);
 			}
+
+			/*
+			if (!find(mylist, 0, cnt, t1)) {
+				mylist[cnt][0] = t1;
+				mylist[cnt][1] = t2;
+				mylist[cnt][2] = t3;
+				cnt++;
+				printf("%d %d %d\n", t1, t2, t3);
+			}
+			*/
 		}
 	}
 	printf("%d\n", cnt);
