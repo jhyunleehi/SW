@@ -11,6 +11,7 @@ typedef struct item {
 int N;
 int map[101][101];
 int count = 0;
+int chk[101][101];
 void rcall(int row, int depth) {
 	//printf("st:%d   depth:%d\n", row, depth);
 	int cnt = 0;
@@ -23,81 +24,57 @@ void rcall(int row, int depth) {
 	if (cnt == 0) return;
 	for (int j = 0; j < N; j++) {
 		if (map[row][j] != 0) {
-			rcall(j, depth);
-			map[row][j] = count;
+			if (chk[row][j] <= depth) {
+				rcall(j, depth);
+				chk[row][j] = depth;
+			}				
 		}
 	}
 }
-void qsort(struct item *pi, int L, int R) {
-	int p = L;
-	int q = R;
-	int v = (pi + ((L + R) / 2))->a;
-	int ta, tb;
-	while (p <= q) {
-		while ((pi + p)->a < v)p++;
-		while ((pi + q)->a > v)q--;
-		if (p <= q) {
-			ta = (pi + p)->a; tb = (pi + p)->b;
-			(pi + p)->a = (pi + q)->a;
-			(pi + p)->b = (pi + q)->b;
-			(pi + q)->a = ta; (pi + q)->b = tb;
-			p++; q--;
-		}
-	}
-	if (q > L)qsort(pi, L, q);
-	if (p < R)qsort(pi, p, R);
-}
-
 int main() {
 	freopen("data.txt", "r", stdin);
 	scanf("%d", &N);
 	struct item *pi = (struct item *)malloc(sizeof(struct item)*N);
-	int a, b;
-	int map[100][2] = { 0, };
 	for (int i = 0; i < N; i++) {
-		scanf("%d %d", &a, &b);
-		(pi + i)->a = (a >= b) ? a : b;
-		(pi + i)->b = (a > b) ? b : a;
-		//(pi + i)->a = (a <= b) ? a : b;
-		//(pi + i)->b = (a < b) ? b : a;
+		scanf("%d %d", &(pi + i)->a, &(pi + i)->b);
 	}
-	qsort(pi, 0, N - 1);
-
-	for (int i = 0; i < N - 1; i++) {
-		for (int j = i; j < N; j++) {
-			if ((pi+i)->a == (pi+j)->a) {
-				if ((pi+i)->b > (pi+j)->b) {
-					int temp = (pi + i)->b;
-					(pi + i)->b = (pi + j)->b;
-					(pi + j)->b = temp;
-				}		
-			}
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			if (i == j) { map[i][j] = 0; continue; }
+			if ((((pi + i)->a >= (pi + j)->a) && ((pi + i)->b >= (pi + j)->b)) ||
+				(((pi + i)->a >= (pi + j)->b) && ((pi + i)->b >= (pi + j)->a)))
+				map[i][j] = 1;
+			else
+				map[i][j] = 0;
 		}
 	}
-
-	for (int i = 0; i < N; i++)	printf("#%2d %3d %3d \n", i, (pi + i)->a, (pi + i)->b);
-
-	for (int i = 1; i < N; i++) {
-		for (int j = i; j >= 0; j--) {
-			if ((pi + i)->b >= (pi + j)->b)
-				map[i][0] ++;
+	int cnt;
+	int max = 0x7fffffff + 1;
+	int st;
+	/*
+	for (int i = 0; i < N; i++) {
+		cnt = 0;
+		for (int j = 0; j < N; j++) {
+			printf("[%d] ", map[i][j]);
+			if (map[i][j] == 1) cnt++;
+			if (cnt > max) { max = cnt; st = i; }
 		}
+		printf(": %d\n", cnt);
+	}
+	*/
+	for (int i = 0; i < N; i++) {				
+		rcall(i, 0);
+		//printf("%d %d\n", i, count);
 	}
 	
-	int cnt = 0;
-	//map[0][0] = 1;	
-	for (int i = 1; i < N; i++) {
-		for (int j = i; j >= 0; j--) {
-			if ((pi + i)->b >= (pi + j)->b) {
-				if (map[i][1] <= map[j][1] + 1)
-					map[i][1] = map[j][1] + 1;
-				if (cnt <= map[i][1]) cnt = map[i][1];
-			}
+	
+	/*
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			printf("[%2d] ", chk[i][j]);
 		}
+		printf("\n");
 	}
-
-	for (int i = 0; i < N; i++)	printf("#%2d [%3d] [%3d]\n", i, map[i][0], map[i][1]);
-
-
-	printf("%d\n", cnt + 1);
+	*/
+	printf("%d\n", count);
 }
