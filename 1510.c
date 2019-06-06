@@ -31,7 +31,7 @@ void rcall(int row, int depth) {
 void qsort(struct item *pi, int L, int R) {
 	int p = L;
 	int q = R;
-	int v = (pi+((L + R) / 2))->a;
+	int v = (pi + ((L + R) / 2))->a;
 	int ta, tb;
 	while (p <= q) {
 		while ((pi + p)->a < v)p++;
@@ -57,9 +57,24 @@ int main() {
 	for (int i = 0; i < N; i++) {
 		scanf("%d %d", &a, &b);
 		(pi + i)->a = (a >= b) ? a : b;
-		(pi + i)->b = (b > a) ? a : b;
+		(pi + i)->b = (a > b) ? b : a;
+		//(pi + i)->a = (a <= b) ? a : b;
+		//(pi + i)->b = (a < b) ? b : a;
 	}
-	qsort(pi, 0, N-1);
+	qsort(pi, 0, N - 1);
+
+	for (int i = 0; i < N - 1; i++) {
+		for (int j = i; j < N; j++) {
+			if ((pi+i)->a == (pi+j)->a) {
+				if ((pi+i)->b > (pi+j)->b) {
+					int temp = (pi + i)->b;
+					(pi + i)->b = (pi + j)->b;
+					(pi + j)->b = temp;
+				}		
+			}
+		}
+	}
+
 	for (int i = 0; i < N; i++)	printf("#%2d %3d %3d \n", i, (pi + i)->a, (pi + i)->b);
 
 	for (int i = 1; i < N; i++) {
@@ -68,19 +83,21 @@ int main() {
 				map[i][0] ++;
 		}
 	}
+	
 	int cnt = 0;
 	//map[0][0] = 1;	
-	for (int i = 1; i < N; i++) {		
+	for (int i = 1; i < N; i++) {
 		for (int j = i; j >= 0; j--) {
-			if ((pi + i)->b >= (pi + j)->b)
-				if(map[i][1] <= map[j][1] + 1)
+			if ((pi + i)->b >= (pi + j)->b) {
+				if (map[i][1] <= map[j][1] + 1)
 					map[i][1] = map[j][1] + 1;
-			if (cnt < map[i][1]) cnt = map[i][1];
-		}		
+				if (cnt <= map[i][1]) cnt = map[i][1];
+			}
+		}
 	}
 
-	for (int i = 0; i < N; i++)	printf("#%2d [%3d] [%3d]\n", i, map[i][0], map[i][1]); 
+	for (int i = 0; i < N; i++)	printf("#%2d [%3d] [%3d]\n", i, map[i][0], map[i][1]);
 
 
-	printf("%d\n", cnt+1);
+	printf("%d\n", cnt + 1);
 }
