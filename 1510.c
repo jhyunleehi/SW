@@ -48,33 +48,12 @@ int main() {
 				map[i][j] = 0;
 		}
 	}
-	int cnt;
-	int max = 0x7fffffff + 1;
-	int st;
-	/*
-	for (int i = 0; i < N; i++) {
-		cnt = 0;
-		for (int j = 0; j < N; j++) {
-			printf("[%d] ", map[i][j]);
-			if (map[i][j] == 1) cnt++;
-			if (cnt > max) { max = cnt; st = i; }
-		}
-		printf(": %d\n", cnt);
-	}
-	*/
+	
+	int max = 0x7fffffff + 1;	
 	for (int i = 0; i < N; i++) {				
 		rcall(i, 0);
 		//printf("%d %d\n", i, count);
 	}
-	
-	
-	/*
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			printf("[%2d] ", chk[i][j]);
-		}
-		printf("\n");
-	}
-	*/
+
 	printf("%d\n", count);
 }
