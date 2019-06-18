@@ -28,18 +28,18 @@ int main() {
 		case 4:
 			srcMapR[(mapCnt - 1) - i] = 2;
 			break;
-		}		
+		}
 	}
 	scanf("%d", &chkCnt);
+	sum = 0;
 	for (int i = 0; i < chkCnt; i++) {
 		for (int j = 0; j < mapCnt; j++) {
 			scanf("%d", &tgtMap[i][j]);
-		}
-		for (int n = 0; n < mapCnt; n++){
-			cnt = 0;
-			sum = 0;
+		}		
+		for (int n = 0; n < mapCnt; n++) {
+			cnt = 0;			
 			for (int k = 0; k < mapCnt; k++) {
-				if (srcMap[k] != tgtMap[i][(k+n)%mapCnt])
+				if (srcMap[k] != tgtMap[i][(k + n) % mapCnt])
 					break;
 				else
 					cnt++;
@@ -60,13 +60,16 @@ int main() {
 				resultList[i] = 1;
 				sum++;
 			}
-		}		
+		}
 	}
 	printf("%d\n", sum);
-	for (int i = 0; i < sum; i++) {
-		for (int j = 0; j < mapCnt; j++) {
-			printf("%d ", tgtMap[i][j]);
+	for (int i = 0; i < chkCnt ; i++) {
+		if (resultList[i] == 1) {
+			for (int j = 0; j < mapCnt; j++) {
+				printf("%d ", tgtMap[i][j]);
+			}
+			printf("\n");
 		}
-		printf("\n");
+		
 	}
 }
