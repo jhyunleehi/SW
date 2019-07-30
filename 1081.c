@@ -7,17 +7,17 @@ typedef struct node {
 	int L, R;
 	int C;
 	int pos;
-	
+
 };
 node Map[2000 + 2];
 int  W[1000][2] = { 0, };
 void chk_tree_p(int node, int target, int key) {
 	if (node == target) return;
-	if ((Map[node].L > 0  ) && (Map[node].L != target)) {
+	if ((Map[node].L > 0) && (Map[node].L != target)) {
 		if (Map[Map[node].L].pos >= key) Map[Map[node].L].pos += 1;
 		chk_tree_p(Map[node].L, target, key);
 	}
-	if ((Map[node].R > 0 ) && (Map[node].R != target)) {
+	if ((Map[node].R > 0) && (Map[node].R != target)) {
 		if (Map[Map[node].R].pos >= key) Map[Map[node].R].pos += 1;
 		chk_tree_p(Map[node].R, target, key);
 	}
@@ -25,11 +25,11 @@ void chk_tree_p(int node, int target, int key) {
 
 void chk_tree_n(int node, int target, int key) {
 	if (node == target) return;
-	if ((Map[node].L > 0  )  && (Map[node].L != target )) {
+	if ((Map[node].L > 0) && (Map[node].L != target)) {
 		if (Map[Map[node].L].pos <= key) Map[Map[node].L].pos -= 1;
 		chk_tree_n(Map[node].L, target, key);
 	}
-	if ((Map[node].R > 0 ) && (Map[node].R != target)) {
+	if ((Map[node].R > 0) && (Map[node].R != target)) {
 		if (Map[Map[node].R].pos <= key)Map[Map[node].R].pos -= 1;
 		chk_tree_n(Map[node].R, target, key);
 	}
@@ -39,7 +39,7 @@ int main() {
 	freopen("Text.txt", "r", stdin);
 	int cnt;
 	int N(0), R(0), L(0);
-	scanf("%d", &cnt);	
+	scanf("%d", &cnt);
 	Map[1].P = -1;
 	Map[1].C = 1;
 	Map[1].pos = 0;
@@ -51,30 +51,30 @@ int main() {
 		Map[N].R = R;
 		if (L != -1) {
 			Map[L].P = N;
-			Map[L].C = Map[N].C + 1;			
+			Map[L].C = Map[N].C + 1;
 			if (Map[N].pos > 0) {
 				Map[L].pos = Map[N].pos;
 				chk_tree_p(1, L, Map[L].pos);
 			}
 			else {
-				Map[L].pos = Map[N].pos-1;
+				Map[L].pos = Map[N].pos - 1;
 				chk_tree_n(1, L, Map[L].pos);
 			}
 
 		}
 		if (R != -1) {
 			Map[R].P = N;
-			Map[R].C = Map[N].C + 1;						
+			Map[R].C = Map[N].C + 1;
 			if (Map[N].pos >= 0) {
 				Map[R].pos = Map[N].pos + 1;
 				chk_tree_p(1, R, Map[R].pos);
 			}
 			else {
-				Map[R].pos = Map[N].pos ;
+				Map[R].pos = Map[N].pos;
 				chk_tree_n(1, R, Map[R].pos);
 			}
-		}			
-		
+		}
+
 	}
 
 	int c;
@@ -83,5 +83,15 @@ int main() {
 		if (W[c][0] > Map[i].pos) W[c][0] = Map[i].pos;
 		if (W[c][1] < Map[i].pos) W[c][1] = Map[i].pos;
 	}
-
+	unsigned int max = 0;
+	unsigned int cha(1);
+	for (int i = 2; i <= c; i++) {
+		if (W[i][0] != 0 && W[i][1] != 0) {
+			if (max < (W[i][1] - W[i][0])) {
+				max = (W[i][1] - W[i][0]);
+				cha = i;
+			}
+		}
+	}
+	printf("%d %d\n", cha, max+1);
 }
