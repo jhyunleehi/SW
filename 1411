@@ -1,0 +1,38 @@
+/**************************************************************
+    Problem: 1411
+    User: jhyunlee
+    Language: Java
+    Result: Success
+    Time:98 ms
+    Memory:10096 kb
+****************************************************************/
+ 
+ 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+ 
+import javax.swing.filechooser.FileNameExtensionFilter;
+ 
+public class Main {
+    static int N;
+    static long D[];
+    public static void main(String[] args) throws IOException {
+        //System.setIn(new FileInputStream("input.1411.txt"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
+         
+        D = new long [N+1];
+        //D(i)번째 놓을 수 있는 타일의 경우수..
+        D[0] =0; D[1]=1; D[2] =3;
+        for (int i = 3; i <= N; i++) {
+            D[i] = (2*D[i-2]+D[i-1])%20100529;          
+        }
+        System.out.println(D[N]);
+        //System.out.println(Arrays.toString(D));
+    }
+ 
+}
