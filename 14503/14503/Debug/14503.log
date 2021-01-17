@@ -1,5 +1,5 @@
 ﻿  14503.cpp
-C:\Users\jhyun\source\repos\SW\14503\14503\14503.cpp(22,2): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\jhyun\source\repos\SW\14503\14503\14503.cpp(23,2): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\jhyun\source\repos\SW\14503\14503\14503.cpp(26,4): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  14503.vcxproj -> C:\Users\jhyun\source\repos\SW\14503\Debug\14503.exe
+C:\Users\jhyunlee\source\repos\SW\14503\14503\14503.cpp(12,2): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\jhyunlee\source\repos\SW\14503\14503\14503.cpp(13,2): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\jhyunlee\source\repos\SW\14503\14503\14503.cpp(16,4): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  14503.vcxproj -> C:\Users\jhyunlee\source\repos\SW\14503\Debug\14503.exe
