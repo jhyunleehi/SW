@@ -1,69 +1,54 @@
 #include<stdio.h>
 
-typedef struct node* pnode;
-typedef struct node {
-	int x;
-	int y;
+typedef struct point* ppoint;
+typedef struct point {
+	int y, x;
+	long long yx;
 };
 
+struct point n[100001];
+void swap(int p, int q) {
+	struct point temp = n[p];
+	n[p] = n[q];
+	n[q] = temp;
+}
+
+void qsort(int L, int R) {
+	int p = L, q = R;
+	long long v = n[(L + R) / 2].yx;
+	while (p <= q) {
+		while (n[p].yx < v)p++;
+		while (n[q].yx > v)q--;
+		if (p <= q) {
+			swap(p, q);
+			p++; q--;
+		}
+	}
+	if (q > L) qsort(L, q);
+	if (p < R)qsort(p, R);
+}
+int getint() {
+	char ch; int res = 0; bool m = false;
+	ch = getchar();
+	if (ch == '-') m = true;
+	else res = ch - '0';
+	while ('0' <= (ch = getchar()) && ch <= '9') {
+		res = res * 10 + ch - '0';
+	}
+	return res * (m ? -1 : 1);
+}
 int N;
-struct node list[200000];
-
-void qsorty(int L, int R) {
-	int p = L; int q = R;
-	int v = list[(L + R) / 2].y;
-	while (p <= q) {
-		while (v > list[p].y) p++;
-		while (v < list[q].y) q--;
-		if (p <= q) {
-			struct node temp = list[p];
-			list[p] = list[q];
-			list[q] = temp;
-			p++; q--;
-		}
+int  main(void) {
+	//freopen("data.txt", "r", stdin);
+	N = getint();
+	for (int i = 0; i < N; i++) {
+		n[i].x = getint(); n[i].y = getint();
+		n[i].yx = n[i].y; n[i].yx = n[i].yx << 20;
+		n[i].yx += n[i].x + 100000;
 	}
-	if (L < q) qsorty(L, q);
-	if (p < R) qsorty(p, R);
-}
-
-void qsortx(int L, int R) {
-	int p = L; int q = R;
-	int v = list[(L + R) / 2].x;
-	while (p <= q) {
-		while (v > list[p].x) p++;
-		while (v < list[q].x) q--;
-		if (p <= q) {
-			struct node temp = list[p];
-			list[p] = list[q];
-			list[q] = temp;
-			p++; q--;
-		}
-	}
-	if (L < q) qsortx(L, q);
-	if (p < R) qsortx(p, R);
-}
-
-int main() {
-	freopen("data.txt", "r", stdin);
-	scanf("%d", &N);
-	for (int i = 1; i <= N; i++) {
-		scanf("%d %d", &list[i].x, &list[i].y);
-	}
-	qsorty(1, N);
-	int x = list[1].y;
-	int s = 1;
-	for (int i = 2; i <= N; i++) {
-		if (x != list[i].y) {
-			if (i - s >= 2)
-				qsortx(s, i - 1);
-			s = i;
-			x = list[i].y;
-		}
-	}
-	qsortx(s, N);
-
-	for (int i = 1; i <= N; i++) {
-		printf("%d %d\n", list[i].x, list[i].y);
+	qsort(0, N - 1);
+	for (int i = 0; i < N; i++) {
+		printf("%d %d\n", n[i].x, n[i].y);
 	}
 	return 0;
 }

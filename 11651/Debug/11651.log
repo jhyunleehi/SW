@@ -1,6 +1,5 @@
 ﻿  main.cpp
-C:\Users\jhyunlee\source\repos\SW\11651\main.cpp(7,2): warning C4091: 'typedef ': 변수를 선언하지 않으면 'node' 왼쪽은 무시됩니다.
-C:\Users\jhyunlee\source\repos\SW\11651\main.cpp(47,2): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\jhyunlee\source\repos\SW\11651\main.cpp(48,2): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\jhyunlee\source\repos\SW\11651\main.cpp(50,3): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  11651.vcxproj -> C:\Users\jhyunlee\source\repos\SW\11651\Debug\11651.exe
+C:\Users\jhyunlee\source\repos\SW\11651\main.cpp(7,2): warning C4091: 'typedef ': 변수를 선언하지 않으면 'point' 왼쪽은 무시됩니다.
+C:\Users\jhyunlee\source\repos\SW\11651\main.cpp(18,12): error C2513: '__int64': '=' 앞에 변수를 선언하지 않았습니다.
+C:\Users\jhyunlee\source\repos\SW\11651\main.cpp(20,20): error C2065: 'v': 선언되지 않은 식별자입니다.
+C:\Users\jhyunlee\source\repos\SW\11651\main.cpp(21,20): error C2065: 'v': 선언되지 않은 식별자입니다.
