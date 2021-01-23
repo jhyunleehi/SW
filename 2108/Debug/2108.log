@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\jhyunlee\source\repos\SW\2108\main.cpp(17,22): warning C4307: '+': 부호 있는 정수 계열 상수 오버플로입니다.
+C:\Users\jhyunlee\source\repos\SW\2108\main.cpp(21,2): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  2108.vcxproj -> C:\Users\jhyunlee\source\repos\SW\2108\Debug\2108.exe
