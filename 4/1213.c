@@ -1,13 +1,3 @@
-/**************************************************************
-    Problem: 1213
-    User: jhyunlee
-    Language: C++
-    Result: Success
-    Time:41 ms
-    Memory:1876 kb
-****************************************************************/
- 
- 
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<malloc.h>

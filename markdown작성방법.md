@@ -7,6 +7,7 @@
 마크다운이 최근 각광받기 시작한 이유는 깃헙([https://github.com](https://github.com)) 덕분이다. 깃헙의 저장소Repository에 관한 정보를 기록하는 README.md는 깃헙을 사용하는 사람이라면 누구나 가장 먼저 접하게 되는 마크다운 문서였다. 마크다운을 통해서 설치방법, 소스코드 설명, 이슈 등을 간단하게 기록하고 가독성을 높일 수 있다는 강점이 부각되면서 점점 여러 곳으로 퍼져가게 된다.
 
 ## 1.2. 마크다운의 장-단점
+----
 ### 1.2.1. 장점
 	1. 간결하다.
 	2. 별도의 도구없이 작성가능하다.
@@ -141,9 +142,12 @@
 
 ```
 This is a normal paragraph:
-
     This is a code block.
 end code block.
+```
+
+```
+# main()
 ```
 
 <code>
@@ -215,14 +219,18 @@ Link: [Google](https://google.com, "google link")
 <address@example.com>
 
 ## 2.7. 강조
-```
+
 *single asterisks*
 _single underscores_
 **double asterisks**
 __double underscores__
 ++underline++
+
+아름다운 이강산을 지키는 우리
+
 ~~cancelline~~
-```
+
+
 *single asterisks*
 _single underscores_
 **double asterisks**
