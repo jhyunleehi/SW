@@ -1,0 +1,9 @@
+﻿  main.cpp
+C:\Users\jhyunlee\source\repos\SW\3190\main.cpp(12,2): warning C4091: 'typedef ': 변수를 선언하지 않으면 'control' 왼쪽은 무시됩니다.
+C:\Users\jhyunlee\source\repos\SW\3190\main.cpp(52,9): warning C4477: 'scanf' : 서식 문자열 '%c'에 'char *' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'int *'입니다.
+C:\Users\jhyunlee\source\repos\SW\3190\main.cpp(41,2): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\jhyunlee\source\repos\SW\3190\main.cpp(42,2): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\jhyunlee\source\repos\SW\3190\main.cpp(45,3): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\jhyunlee\source\repos\SW\3190\main.cpp(50,2): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\jhyunlee\source\repos\SW\3190\main.cpp(52,3): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  3190.vcxproj -> C:\Users\jhyunlee\source\repos\SW\3190\Debug\3190.exe
