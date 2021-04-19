@@ -1,0 +1,13 @@
+﻿  main.c
+C:\Users\jhyunlee\source\repos\SW\sw15\main.c(7,21): warning C4013: 'read'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\jhyunlee\source\repos\SW\sw15\main.c(8,18): warning C4013: 'write'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\jhyunlee\source\repos\SW\sw15\main.c(9,21): warning C4047: '함수': 'const char *const '의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\Users\jhyunlee\source\repos\SW\sw15\main.c(9,20): warning C4024: 'printf': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\Users\jhyunlee\source\repos\SW\sw15\main.c(10,17): warning C4013: 'exit'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\jhyunlee\source\repos\SW\sw15\main.c(14,17): warning C4047: '함수': 'const char *const '의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\Users\jhyunlee\source\repos\SW\sw15\main.c(14,16): warning C4024: 'printf': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\Users\jhyunlee\source\repos\SW\sw15\main.c(27,23): warning C4013: 'open'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\jhyunlee\source\repos\SW\sw15\main.c(28,21): warning C4047: '함수': 'const char *const '의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\Users\jhyunlee\source\repos\SW\sw15\main.c(28,20): warning C4024: 'printf': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\Users\jhyunlee\source\repos\SW\sw15\main.c(32,14): warning C4013: 'close'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  sw15.vcxproj -> C:\Users\jhyunlee\source\repos\SW\sw15\Debug\sw15.exe
