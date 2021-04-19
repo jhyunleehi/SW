@@ -1,0 +1,2 @@
+C:\Users\jhyunlee\source\repos\SW\sw15\Debug\sw15.exe
+C:\Users\jhyunlee\source\repos\SW\sw15\Debug\sw15.pdb

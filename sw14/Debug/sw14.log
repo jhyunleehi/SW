@@ -1,0 +1,19 @@
+﻿  main.cpp
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(9,17): error C3861: 'read': 식별자를 찾을 수 없습니다.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(10,13): error C3861: 'write': 식별자를 찾을 수 없습니다.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(11,43): error C2664: 'int printf(const char *const ,...)': 인수 1을(를) 'int'에서 'const char *const '(으)로 변환할 수 없습니다.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(11,20): message : 정수 계열 형식에서 포인터 형식으로 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(948,37): message : 'printf' 선언을 참조하십시오.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(12,13): error C3861: 'exit': 식별자를 찾을 수 없습니다.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(16,38): error C2664: 'int printf(const char *const ,...)': 인수 1을(를) 'int'에서 'const char *const '(으)로 변환할 수 없습니다.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(16,16): message : 정수 계열 형식에서 포인터 형식으로 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(948,37): message : 'printf' 선언을 참조하십시오.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(17,9): error C3861: 'exit': 식별자를 찾을 수 없습니다.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(28,9): error C3861: 'exit': 식별자를 찾을 수 없습니다.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(32,19): error C3861: 'open': 식별자를 찾을 수 없습니다.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(33,55): error C2664: 'int printf(const char *const ,...)': 인수 1을(를) 'int'에서 'const char *const '(으)로 변환할 수 없습니다.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(33,20): message : 정수 계열 형식에서 포인터 형식으로 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(948,37): message : 'printf' 선언을 참조하십시오.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(34,13): error C3861: 'exit': 식별자를 찾을 수 없습니다.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(37,9): error C3861: 'close': 식별자를 찾을 수 없습니다.
+C:\Users\jhyunlee\source\repos\SW\sw14\main.cpp(39,5): error C3861: 'exit': 식별자를 찾을 수 없습니다.
