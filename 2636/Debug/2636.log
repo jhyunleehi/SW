@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Users\jhyunlee\source\repos\SW\2636\main.cpp(11,2): warning C4091: 'typedef ': 변수를 선언하지 않으면 'node' 왼쪽은 무시됩니다.
+C:\Users\jhyunlee\source\repos\SW\2636\main.cpp(15,2): warning C4091: 'typedef ': 변수를 선언하지 않으면 'queue' 왼쪽은 무시됩니다.
+C:\Users\jhyunlee\source\repos\SW\2636\main.cpp(88,2): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\jhyunlee\source\repos\SW\2636\main.cpp(89,2): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\jhyunlee\source\repos\SW\2636\main.cpp(92,4): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  2636.vcxproj -> C:\Users\jhyunlee\source\repos\SW\2636\Debug\2636.exe
