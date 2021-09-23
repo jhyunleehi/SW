@@ -1,0 +1,5 @@
+﻿  main.cpp
+C:\Users\jhyunlee\source\repos\SW\13277\main.cpp(24,2): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\jhyunlee\source\repos\SW\13277\main.cpp(26,2): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\jhyunlee\source\repos\SW\13277\main.cpp(31,2): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  13277.vcxproj -> C:\Users\jhyunlee\source\repos\SW\13277\Debug\13277.exe
