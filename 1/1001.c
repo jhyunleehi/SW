@@ -9,7 +9,7 @@ int main () {
     int x=0, y=0;
     int a, b, c;    
     //freopen("input.dat", "r", stdin);
-    while (true) {
+    while (1) {
         scanf("%d %d", &a, &b);
         if (a == 0 && b == 0) break;
         if ((a == 0) && (b == 0)) break;
