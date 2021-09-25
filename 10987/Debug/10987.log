@@ -1,3 +1,0 @@
-﻿  main.cpp
-C:\Users\jhyunlee\source\repos\SW\10987\main.cpp(4,2): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  10987.vcxproj -> C:\Users\jhyunlee\source\repos\SW\10987\Debug\10987.exe

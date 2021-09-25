@@ -1,7 +1,5 @@
 # 초급 연습
 
-
-
 ## 초급 연습
 
 ####  fread(), getbyte(), getInt(), dfs()
