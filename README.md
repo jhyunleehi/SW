@@ -1,6 +1,6 @@
-# 초급 연습
+# Test
 
-## 초급 연습
+## Code
 
 ####  fread(), getbyte(), getInt(), dfs()
 
@@ -113,7 +113,6 @@ int main(){
 }
 
 ```
-
 
 
 #### buffered read()
