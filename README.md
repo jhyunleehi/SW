@@ -211,6 +211,41 @@ int main() {
 }
 ```
 
+문제를 segment tree로 정리할 수 도 있는데... 그냥 선형으로 더해 놓고 구간에 영역을 빼면 쉽게 구했군
+
+```c
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int N, M, a, b;
+vector<int> vec;
+int main()
+{
+    cin.tie(NULL);
+	cout.tie(NULL);
+	iostream::sync_with_stdio(false);
+ 	cin >> N >> M;
+	vec.resize(N);
+	for (int i = 1; i <= N; ++i)
+	{
+		cin >> vec[i];
+		vec[i] += vec[i - 1];
+	}
+
+	while (M--)
+	{
+		cin >> a >> b;
+		cout << vec[b] - vec[a - 1] << '\n';
+	}
+
+	return 0;
+}
+```
+
+
+
+
 
 ### heap
 
