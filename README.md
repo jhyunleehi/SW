@@ -1,6 +1,6 @@
-# Test
+# Code
 
-## Code
+## Read
 
 ####  fread(), getbyte(), getInt(), dfs()
 
@@ -81,7 +81,36 @@ int main() {
 }
 ```
 
+#### buffered read()
 
+```c
+#include<stdio.h>
+
+int N;
+char str[101];
+char *p;
+int size;
+int  main(void) {
+	freopen("data.txt", "r", stdin);
+	fread(str, 1, 101, stdin);
+	p = str;
+	for (int i = 0; *(p + i) != '\0'; i++) {
+		if ((*(p + i) >= 'A') && (*(p + i) <= 'Z')  ) {
+			printf("%c", ((*(p + i) - 'A') +13) % 26 + 'A');
+		}
+		else if ((*(p + i) >= 'a') && (*(p + i) <= 'z')) {
+			printf("%c", ((*(p + i) - 'a') +13) % 26 + 'a');
+		}
+		else {
+			printf("%c", *(p + i));
+		}
+	}
+	printf("\n");
+	return 0;
+}
+```
+
+### Math
 
 #### 에라토스테세스의 체
 
@@ -115,40 +144,75 @@ int main(){
 ```
 
 
-#### buffered read()
+
+
+
+```
+
+
+## string
+
+### strcmp strcpy
+
+#### strcmp
 
 ```c
-#include<stdio.h>
-
-int N;
-char str[101];
-char *p;
-int size;
-int  main(void) {
-	freopen("data.txt", "r", stdin);
-	fread(str, 1, 101, stdin);
-	p = str;
-	for (int i = 0; *(p + i) != '\0'; i++) {
-		if ((*(p + i) >= 'A') && (*(p + i) <= 'Z')  ) {
-			printf("%c", ((*(p + i) - 'A') +13) % 26 + 'A');
-		}
-		else if ((*(p + i) >= 'a') && (*(p + i) <= 'z')) {
-			printf("%c", ((*(p + i) - 'a') +13) % 26 + 'a');
-		}
-		else {
-			printf("%c", *(p + i));
-		}
+void strcpy(const char *a, char *b) {
+	int i = 0;
+	while (*(a + i) != '\0') {
+		*(b + i) = *(a + i);
+		i++;
 	}
-	printf("\n");
+	*(b + i) = '\0';
+}
+
+int strcmp(const char *a, const char *b) {
+	int i = 0;
+	while ((*(a + i) != '\0') || (*(b + i) != '\0')){
+		if (*(a + i) < *(b + i)) return -1;
+		if (*(a + i) > *(b + i)) return 1;
+	i++;
+	}
 	return 0;
 }
 ```
 
 
+## Tree
+### segment tree
+#### 부분합
+```c
+#include <stdio.h>
+int N, M;
+int a[100001*4], ctree[100001*4];
+int init(int p, int q, int node) {
+	if (p == q) return ctree[node] = a[p];
+	int mid = (p + q) / 2;
+	return ctree[node] = init(p, mid, node * 2) + init(mid + 1, q, node * 2 + 1);
+}
+int gtree(int p, int q, int node, int L, int R) {
+	if (R < p || q < L  ) return 0;
+	if (L <= p && q <= R) return ctree[node];
+	int mid = (p + q) / 2;
+	return gtree(p, mid, node * 2, L, R) + gtree(mid + 1, q, node * 2 + 1, L, R);
+}
+int main() {
+	freopen("data.txt", "r", stdin);
+	scanf("%d %d",&N, &M);
+	for (int i = 1; i <= N; i++) scanf("%d", &a[i]);
+	int sum = init(1,N,1);	
+	for (int k = 1; k <= M; k++) {
+		int i = 0, j = 0;
+		scanf("%d %d", &i, &j);
+		int out = gtree(1, N, 1, i,j);
+		printf("%d\n", out);
+	}
+	return 0;
+}
+```
 
-##  데이터 구조
 
-### heap 데이터
+### heap
 
 ```c
 #include<stdio.h>
@@ -202,35 +266,3 @@ int main() {
 	}	
 	return 0;
 }
-
-```
-
-
-
-
-
-### strcmp strcpy
-
-#### strcmp
-
-```c
-void strcpy(const char *a, char *b) {
-	int i = 0;
-	while (*(a + i) != '\0') {
-		*(b + i) = *(a + i);
-		i++;
-	}
-	*(b + i) = '\0';
-}
-
-int strcmp(const char *a, const char *b) {
-	int i = 0;
-	while ((*(a + i) != '\0') || (*(b + i) != '\0')){
-		if (*(a + i) < *(b + i)) return -1;
-		if (*(a + i) > *(b + i)) return 1;
-	i++;
-	}
-	return 0;
-}
-```
-
