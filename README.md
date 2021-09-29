@@ -145,11 +145,6 @@ int main(){
 
 
 
-
-
-```
-
-
 ## string
 
 ### strcmp strcpy
