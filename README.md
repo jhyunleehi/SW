@@ -2,11 +2,11 @@
 
 ## Read
 
-####  fread(), getbyte(), getInt(), dfs()
+#### fread(), getbyte(), getInt(), dfs()
 
-* 1<<20 512KB 단위로 읽어오는 것
-* 읽어온 데이터 데이터 버퍼에서 원하는 만큼 char 단위로 읽어 와서 integer 변환
-* dfs 구현
+- 1<<20 512KB 단위로 읽어오는 것
+- 읽어온 데이터 데이터 버퍼에서 원하는 만큼 char 단위로 읽어 와서 integer 변환
+- dfs 구현
 
 ```c
 #include<stdio.h>
@@ -43,7 +43,7 @@ int getInt() {
 	return (minus == -1) ? temp * -1 : temp;
 }
 
-bool dfs(int s, int n) {	
+bool dfs(int s, int n) {
 	//printf("[%d][%d]\n", s, n);
 	visit[n] = 1;
 	if (map[n] == s) return true;
@@ -110,6 +110,61 @@ int  main(void) {
 }
 ```
 
+### read line
+
+- fget `\n` 또는 EOF를 만날 때까지 읽어서 char \* return 한다.
+- return 되는 char\* 에 '\n'이 포함되어 있기 때문에 비교할때 주의
+
+```c
+#include <stdio.h>
+char instr[1 << 10];
+char str[30];
+const char *msg1 = "고무오리 디버깅 시작" ;
+const char *msg2 = "문제";
+const char *msg3 = "고무오리";
+const char *msg4 = "고무오리 디버깅 끝";
+
+int strCmp(const char* src, char* dest) {
+	while (1) {
+		if (*src != *dest) return (*src < *dest) ? -1 : 1;
+		if (!*src) break;
+		src++; dest++;
+	}
+	return 0;
+}
+void strTrim(char* str) {
+	while (*str != '\0') {
+		if (*str == '\n') *str = '\0';
+		str++;
+	}
+}
+
+int main() {
+	int problem = 0;
+	freopen("data.txt", "r", stdin);
+	while (fgets(instr, 1<<10, stdin)) {
+		strTrim(instr);
+		if (!strCmp(msg1, instr)) {
+			problem = 0;
+		}
+		else if (!strCmp(msg4, instr)) {
+			if (problem == 0) printf("고무오리야 사랑해\n");
+			else printf("힝구\n");
+			break;
+		}
+		else if (!strCmp(msg2, instr)) {
+			problem++;
+		}
+		else if (!strCmp(msg3, instr)) {
+			if (problem <= 0) problem += 2;
+			else problem--;
+		}
+
+	}
+
+}
+```
+
 ### Math
 
 #### 에라토스테세스의 체
@@ -122,11 +177,11 @@ int m, n;
 int min = 0x7fffffff;
 int sum;
 int main(){
-	freopen("data.txt", "r", stdin);	
+	freopen("data.txt", "r", stdin);
 	scanf("%d", &m);
 	scanf("%d", &n);
 	for (int i = 2; i*i <= n; i++) {
-		if ( s[i] == 0)		
+		if ( s[i] == 0)
 			for (int j = i + i; j <= n; j=j + i)
 			s[j] = 1;
 	}
@@ -142,8 +197,6 @@ int main(){
 }
 
 ```
-
-
 
 ## string
 
@@ -172,10 +225,12 @@ int strcmp(const char *a, const char *b) {
 }
 ```
 
-
 ## Tree
+
 ### segment tree
+
 #### 부분합
+
 ```c
 #include <stdio.h>
 int N, M;
@@ -195,7 +250,7 @@ int main() {
 	freopen("data.txt", "r", stdin);
 	scanf("%d %d",&N, &M);
 	for (int i = 1; i <= N; i++) scanf("%d", &a[i]);
-	int sum = init(1,N,1);	
+	int sum = init(1,N,1);
 	for (int k = 1; k <= M; k++) {
 		int i = 0, j = 0;
 		scanf("%d %d", &i, &j);
@@ -293,10 +348,6 @@ int main() {
 }
 ```
 
-* 여기서 in[b]=c를 해줘야 하는 이유를 정말 모르겠다. 
-
-
-
 ### heap
 
 ```c
@@ -322,7 +373,7 @@ void push(int n) {
 
 int pop() {
 	if (hcount == 0) return 0;
-	int ret = heap[1];			
+	int ret = heap[1];
 	heap[1] = heap[hcount];
 	hcount--;
 
@@ -347,7 +398,8 @@ int main() {
 	for (int i = 1; i <= N; i++) {
 		scanf("%d", &a);
 		if (a == 0) printf("%d\n", pop());
-		else push(a);			
-	}	
+		else push(a);
+	}
 	return 0;
 }
+```
