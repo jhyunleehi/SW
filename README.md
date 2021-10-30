@@ -165,9 +165,15 @@ int main() {
 }
 ```
 
-### Math
+## 수학
 
-#### 에라토스테세스의 체
+- 약수: 약수는 어떤 수를 나머지 없이 나눌 수 있는 정수입니다.
+  1, 3, 5, 15는 15를 나머지 없이 나눌 수 있기 때문에, 15의 약수입니다.
+- 소수: 자기 자신과 1로만 나눌 수 있는 수입니다.
+
+### 에라토스테네스의 체
+
+- 고대 그리스의 수학자 에라토스테네스가 만들어 낸 소수를 찾는 방법. 이 방법은 마치 체로 치듯이 수를 걸러낸다
 
 ```c
 #include<stdio.h>
@@ -202,7 +208,23 @@ int main(){
 
 ### strcmp strcpy
 
-#### strcmp
+- xv6 string copy, comp
+
+```c
+char* strcpy(char *s, const char *t){
+  char *os;
+  os = s;
+  while((*s++ = *t++) != 0);
+  return os;
+}
+
+int strcmp(const char *p, const char *q){
+  while(*p && *p == *q)   p++, q++;
+  return (uchar)*p - (uchar)*q;
+}
+```
+
+### strcmp
 
 ```c
 void strcpy(const char *a, char *b) {
@@ -225,16 +247,235 @@ int strcmp(const char *a, const char *b) {
 }
 ```
 
+## stack
+
+```c
+#include<stdio.h>
+
+int N;
+int s[100001];
+int top=0;
+int cnt=1;
+int t;
+char M[200100];
+int  idx = 1;
+void push(int n) {
+	s[++top] = n;
+}
+int pop() {
+	if (top >=1) return s[--top];
+	else return  -1;
+}
+int main() {
+	int v = 1;
+	freopen("data.txt", "r", stdin);
+	scanf("%d", &N);
+	while(N--){
+		scanf("%d", &t);
+		while (s[top] < t) {
+			if (s[top] < t) {
+				push(cnt++);
+				M[idx++] = '+';
+			}
+		}
+		if (s[top] == t) {
+			M[idx++] = '-';
+			if (pop() == -1) v = 0;
+		}
+		else {
+			v = 0;
+		}
+	}
+	if (v)	for (int i = 1; i < idx; i++) printf("%c\n", M[i]);
+	else printf("NO");
+	return 0;
+}
+
+```
+
+## Linked List
+
+### linked List
+
+```c
+#include <stdio.h>
+#include <malloc.h>
+
+typedef struct node *pnode;
+typedef struct node {
+	int n;
+	pnode next;
+	pnode pre;
+};
+
+pnode head;
+pnode tail;
+int count;
+
+int n, k;
+
+void add(int i) {
+	pnode temp = (pnode)malloc(sizeof(struct node));
+	count++;
+	temp->n = i;
+	temp->next = head;
+	temp->pre = tail;
+	if (tail == NULL) {
+		head = tail = temp;
+	}
+	else {
+		tail->next = temp;
+		tail = temp;
+		tail->next->pre = temp;
+	}
+}
+
+void get(int k) {
+
+	if (count <= 0) return;
+	for (int i = 1; i <= k - 1; i++) {
+		head = head->next;
+	}
+	if (count > 1)	printf("%d, ", head->n );
+	else {
+		printf("%d", head->n);
+		return;
+	}
+	head->pre->next = head->next;
+	head->next->pre = head->pre;
+	pnode  temp = head;
+	head = head->next;
+	free(temp);
+	count--;
+}
+int main() {
+	freopen("data.txt", "r", stdin);
+	scanf("%d %d", &n, &k);
+	for (int i = 1; i <= n; i++) {
+		add(i);
+	}
+	printf("<");
+	for (int i = 1; i <= n; i++) {
+		get(k);
+	}
+	printf(">");
+	return 0;
+}
+```
+
+## Sort
+
+### quick sort
+
+```c
+#include <stdio.h>
+int N;
+typedef struct person *pperson;
+typedef struct person {
+	char name [16];
+	int  birth;
+};
+struct person ps[101];
+int d, m, y;
+void qsort(int L, int R) {
+	int p = L,q = R, v=ps[(p + q) / 2].birth;
+	while (p <= q) {
+		while (v > ps[p].birth)p++;
+		while (v < ps[q].birth)q--;
+		if (p <= q) {
+			struct person temp = ps[p];
+			ps[p] = ps[q];
+			ps[q] = temp;
+			p++; q--;
+		}
+	}
+	if (L < q) qsort(L, q);
+	if (p < R)qsort(p, R);
+}
+int main() {
+	scanf("%d" , &N);
+	for (int i = 0; i < N; i++) {
+		scanf("%s %d %d %d", ps[i].name, &d, &m, &y);
+		ps[i].birth = y * 10000 + m * 100 + d;
+	}
+	qsort(0, N - 1);
+	printf("%s\n", ps[N - 1].name);
+	printf("%s\n", ps[0].name);
+	return 0;
+}
+```
+
+## 이분탐색
+
+### qsort, bsearch
+
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+int N, M;
+int n[100000 + 1];
+int m[100000 + 1];
+int max;
+void qsort(int map[], int L, int R) {
+	int p = L;
+	int q = R;
+	int v = map[(p + q) / 2];
+	while (p <= q) {
+		while (v > map[p])p++;
+		while (v < map[q])q--;
+		if (p <= q) {
+			int temp = map[p];
+			map[p] = map[q];
+			map[q] = temp;
+			p++; q--;
+		}
+	}
+	if (L < q) qsort(map, L, q);
+	if (R > p) qsort(map, p, R);
+}
+
+int bsearch(int L, int R, int Q) {
+	while (L <= R) {
+		int mid = (L + R) / 2;
+		if (n[mid] == Q) return mid;
+		else if (n[mid] > Q) {
+			R = mid - 1;
+		}
+		else {
+			L = mid + 1;
+		}
+	}
+	return -1;
+}
+
+int main() {
+	//freopen("data.txt", "r", stdin);
+	scanf("%d", &N);
+	for (int i = 0; i < N; i++) scanf("%d", &n[i]);
+	scanf("%d", &M);
+	for (int i = 0; i < M; i++) scanf("%d", &m[i]);
+	qsort(n, 0, N - 1);
+	for (int i = 0; i < M; i++) {
+		if (bsearch(0, N - 1, m[i]) != -1)
+			printf("1\n");
+		else
+			printf("0\n");
+	}
+	return 0;
+}
+```
+
 ## Tree
 
-### segment tree
+## segment tree
 
-#### 부분합
+### 부분합
 
 ```c
 #include <stdio.h>
 int N, M;
 int a[100001*4], ctree[100001*4];
+
 int init(int p, int q, int node) {
 	if (p == q) return ctree[node] = a[p];
 	int mid = (p + q) / 2;
@@ -277,18 +518,14 @@ int main()
 	iostream::sync_with_stdio(false);
  	cin >> N >> M;
 	vec.resize(N);
-	for (int i = 1; i <= N; ++i)
-	{
+	for (int i = 1; i <= N; ++i){
 		cin >> vec[i];
 		vec[i] += vec[i - 1];
 	}
-
-	while (M--)
-	{
+	while (M--){
 		cin >> a >> b;
 		cout << vec[b] - vec[a - 1] << '\n';
 	}
-
 	return 0;
 }
 ```
@@ -348,11 +585,176 @@ int main() {
 }
 ```
 
-### heap
+### segment tree rebuild
+
+- rebuild
+
+```c
+#include <stdio.h>
+int N, M, K;
+long long ctree[1000001 * 4], in[1000001 * 2];
+
+long long build(int S, int E, int node) {
+	if (S == E) return ctree[node] = in[S];
+	int mid = (S + E) / 2;
+	return ctree[node] = build(S, mid, node * 2) + build(mid + 1, E, node * 2 + 1);
+}
+
+long long sum(int S, int E, int node, int p, int q) {
+	if (p > E || q < S) return 0;
+	if (p <= S && q >= E) return ctree[node];
+	int mid = (S + E) / 2;
+	return sum(S, mid, node * 2, p, q) + sum(mid + 1, E, node * 2 + 1, p, q);
+}
+
+void rebuild(int S, int E, int node, int index, long long diff) {
+	if (index < S || index > E) return;
+	ctree[node] += diff;
+	if (S != E) {
+		int mid = (S + E) / 2;
+		rebuild(S, mid, node * 2, index, diff);
+		rebuild(mid + 1, E, node * 2 + 1, index, diff);
+	}
+}
+
+long long a, b, c;
+int main() {
+	//freopen("data.txt", "r", stdin);
+	scanf("%d %d %d", &N, &M, &K);
+	for (int i = 1; i <= N; i++) {
+		scanf("%lld", &in[i]);
+	}
+	build(1, N, 1);
+	for (int i = 1; i <= M + K; i++) {
+		scanf("%lld %lld %lld", &a, &b, &c);
+		if (a == 2) {
+			long long ans = sum(1, N, 1, b, c);
+			printf("%lld\n", ans);
+		}
+		else if (a == 1) {
+			long long diff = c - in[b];
+			in[b] = c;
+			rebuild(1, N, 1, b, diff);
+		}
+	}
+	return 0;
+}
+```
+
+## heap
+
+### max heap
 
 ```c
 #include<stdio.h>
 
+
+int N, hcount;
+int heap[100010];
+
+void push(int n) {
+	heap[++hcount] = n;
+	int child = hcount;
+	int parent = child / 2;
+	while (child > 1 && heap[child] > heap[parent]) {
+		int temp = heap[child];
+		heap[child] = heap[parent];
+		heap[parent] = temp;
+		child = parent;
+		parent = child / 2;
+	}
+}
+
+int pop() {
+	if (hcount == 0) return 0;
+	int ret = heap[1];
+	heap[1] = heap[hcount];
+	hcount--;
+
+	int parent = 1;
+	int child = parent * 2;
+	if (child + 1 <= hcount)  child = (heap[child] > heap[child + 1]) ? child : child + 1;
+	while (child <= hcount && heap[child] > heap[parent]) {
+		int temp = heap[child];
+		heap[child] = heap[parent];
+		heap[parent] = temp;
+		parent = child;
+		child = parent * 2;
+		if (child + 1 <= hcount)  child = (heap[child] > heap[child + 1]) ? child : child + 1;
+	}
+	return ret;
+}
+
+int a, b;
+int main() {
+	//freopen("data.txt", "r", stdin);
+	scanf("%d", &N);
+	for (int i = 1; i <= N; i++) {
+		scanf("%d", &a);
+		if (a == 0) printf("%d\n", pop());
+		else push(a);
+	}
+	return 0;
+}
+```
+
+### Min heap
+
+```c
+#include<stdio.h>
+int N, hcount;
+int heap[100010];
+
+void push(int n) {
+	heap[++hcount] = n;
+	int child = hcount;
+	int parent = child / 2;
+	while (child > 1 && heap[child] < heap[parent]) {
+		int temp = heap[child];
+		heap[child] = heap[parent];
+		heap[parent] = temp;
+		child = parent;
+		parent = child / 2;
+	}
+}
+
+int pop() {
+	if (hcount == 0) return 0;
+	int ret = heap[1];
+	heap[1] = heap[hcount];
+	hcount--;
+
+	int parent = 1;
+	int child = parent * 2;
+	if (child + 1 <= hcount)  child = (heap[child] < heap[child + 1]) ? child : child + 1;
+	while (child <= hcount && heap[child] < heap[parent]) {
+		int temp = heap[child];
+		heap[child] = heap[parent];
+		heap[parent] = temp;
+		parent = child;
+		child = parent * 2;
+		if (child + 1 <= hcount)  child = (heap[child] < heap[child + 1]) ? child : child + 1;
+	}
+	return ret;
+}
+
+int a, b;
+int main() {
+	//freopen("data.txt", "r", stdin);
+	scanf("%d", &N);
+	for (int i = 1; i <= N; i++) {
+		scanf("%d", &a);
+		if (a == 0) printf("%d\n", pop());
+		else push(a);
+	}
+	return 0;
+}
+```
+
+### heap
+
+```c
+#include<stdio.h>
 
 int N;
 int heap[100010];
