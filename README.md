@@ -106,6 +106,7 @@ int getInt() {
 	}
 	return temp;
 }
+
 int main() {
 	freopen("data.txt", "r", stdin);		
 	int num = 0;
@@ -206,6 +207,26 @@ int main() {
 - 약수: 약수는 어떤 수를 나머지 없이 나눌 수 있는 정수입니다.
   1, 3, 5, 15는 15를 나머지 없이 나눌 수 있기 때문에, 15의 약수입니다.
 - 소수: 자기 자신과 1로만 나눌 수 있는 수입니다.
+
+### GCD
+
+```c
+int get_gcd(int A, int B) {
+    if (A < B) {
+        int temp = B;
+        B = A;
+        A = temp;
+    }
+    while (A%B != 0) {
+        A = A % B;
+        int temp = A;
+        A = B; B = temp;
+    }   
+    //printf("[%d]\n", B);
+    return B;
+}
+``` 
+
 
 ### 에라토스테네스의 체
 
