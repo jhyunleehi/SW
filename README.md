@@ -304,6 +304,78 @@ int strcmp(const char *a, const char *b) {
 }
 ```
 
+#### string sort
+
+```c
+#include <stdio.h>
+#include<malloc.h>
+char* nstr[10];
+char* mstr[20];
+int N, M;
+
+int strcmp(char* p, char* q) {
+	while (*p && *p == *q) 	p++, q++;
+	return *p - *q;
+}
+
+void qsort(char* nstr[], int L, int R) {
+	char* m = nstr[(L + R) / 2];
+	int p = L, q = R;
+	while (p < q) {
+		while (strcmp(m, nstr[p]) > 0) p++;
+		while (strcmp(m, nstr[q]) < 0) q--;
+		if (p <= q) {
+			char* temp = nstr[p];
+			nstr[p] = nstr[q];
+			nstr[q] = temp;
+			p++; q--;
+		}
+	}
+	if (L < q) qsort(nstr, L, q);
+	if (p < R) qsort(nstr, p, R);
+}
+
+int bsearch(int p, int q, char* s) {
+	while (p <= q) {
+		int mid = (p + q) / 2;
+		int t = strcmp(s,nstr[mid]);
+		if (t == 0)
+			return mid;
+		else if (t < 0)
+			q = mid - 1;
+		else if (t > 0)
+			p = mid + 1;
+	}
+	return -1;
+}
+
+int main() {
+	freopen("data.txt", "r", stdin);
+	scanf("%d %d", &N, &M);
+	for (int i = 0; i < N; i++) {
+		char* str = (char*)malloc(sizeof(char) * 501);
+		scanf("%s", str);
+		nstr[i] = str;
+	}
+	for (int i = 0; i < M; i++) {
+		char* str = (char*)malloc(sizeof(char) * 501);
+		scanf("%s", str);
+		mstr[i] = str;
+	}
+	qsort(nstr, 0, N - 1);
+	//for (int i = 0; i < N; i++)	printf("%s\n", nstr[i]);
+	int count = 0;
+	for (int i = 0; i < M; i++) {
+		if (-1 != bsearch(0, N - 1, mstr[i])) {
+			//printf("%s\n", mstr[i]);
+			count++;
+		}
+	}
+	printf("%d\n", count);
+}
+```
+
+
 ## stack
 
 ```c
