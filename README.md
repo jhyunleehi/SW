@@ -1152,3 +1152,79 @@ int main() {
 	return 0;
 }
 ```
+
+
+### 허프만 엔코딩
+```c
+#include<stdio.h>
+#include<malloc.h>
+typedef struct node* pnode;
+typedef struct node {
+	char C;
+	pnode  L;
+	pnode R;
+};
+pnode createNode(char c, pnode left, pnode right) {
+	pnode p = (pnode)malloc(sizeof(node));
+	p->C = c;
+	p->L = left;
+	p->R = right;
+	return p;
+}
+
+void buildTree(pnode ht, char c, char* bin) {
+	int k = 0;
+	pnode tree = ht;
+	while (bin[k] != '\0') {
+		if (bin[k] == '0') {
+			if (tree->L == NULL) tree->L = createNode(c, NULL, NULL);			
+			tree = tree->L;
+		}
+		else {
+			if (tree->R == NULL) tree->R = createNode(c, NULL, NULL);						
+			tree = tree->R;
+		}
+		k++;
+	}	 
+}
+
+char decode(pnode ht, char* code, int *idx) {
+	pnode  tree= ht;	
+	int k = *idx;
+	while (tree->L != NULL || tree->R != NULL) {
+		if (*(code + k) == '0') 
+			tree = tree->L;
+		else 
+			tree = tree->R;
+		k++;
+	}
+	*idx = k;
+	return tree->C;
+}
+
+int N;
+pnode htree;
+int main() {
+	char C;
+	char str[10];
+	char bin[20];
+	htree = (pnode)malloc(sizeof(node));
+	htree->C = '\0'; htree->L = NULL; htree->R = NULL;;
+
+	scanf("%d", &N); {
+		for (int i = 0; i < N; i++) {
+			scanf("%s %s", &str, &bin);		
+			C = str[0];
+			buildTree(htree, C, bin);			
+		}
+	}
+	char code[1000];
+	char c;
+	scanf("%s", &code);
+	int k = 0;
+	while (code[k] != '\0') {
+		c = decode(htree, code, &k);
+		printf("%c", c);		
+	}
+}
+```
