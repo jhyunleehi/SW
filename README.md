@@ -492,6 +492,152 @@ int main() {
 }
 ```
 
+#### 인접행렬 (adjacency matrix)
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+int N, M, V;
+
+char map[1001][1001];
+
+
+int vmap[1001];
+void dfs(int n) {
+	printf("%d ", n);
+	vmap[n] = 1;
+	//if (list[n] == NULL) return;
+	for (int i = 1; i <= N; i++) {
+		if ((map[n][i] == 1) && (vmap[i] == 0)) {
+			dfs(i);
+		}
+	}
+}
+
+int v[1001];
+int q[1001];
+int qh, qr;
+void bfs(int n) {
+	v[n] = 1;
+	q[qh++] = n;
+	while (qh > qr) {
+		n = q[qr++];
+		printf("%d ", n);
+		for (int i = 1; i <= N; i++) {
+			if ((map[n][i] ==1)&& (v[i] == 0)) {
+				v[i] = 1; //visited 
+				q[qh++] = i;
+			}
+		}		
+	}
+}
+
+int main() {
+	int a, b;
+	//freopen("data.txt", "r", stdin);
+	scanf("%d %d %d", &N,&M,&V);
+	for (int i = 1; i <= M; i++) {
+		scanf("%d %d", &a, &b);
+		//addnode(a, b);
+		//addnode(b, a);
+		map[a][b] = 1;
+		map[b][a] = 1;
+	}
+	dfs(V);
+	printf("\n");
+	bfs(V);
+	
+	return 0;
+}
+
+
+```
+#### 인접리스트 (adjacency list)
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+int N, M, V;
+
+char map[1001][1001];
+
+typedef struct node *pnode;
+typedef struct node {
+	int n;
+	pnode next;
+};
+
+struct node *list[1001];
+void addnode(int from, int to) {
+	if (list[from] == NULL) {
+		pnode temp=(struct node*)malloc(sizeof(struct node));
+		temp->n = to;
+		temp->next = NULL;
+		list[from] = temp;
+	}else {
+		pnode temp = list[from];
+		while (temp->next != NULL) {
+			temp = temp->next;
+		}
+		pnode nNode = (struct node*)malloc(sizeof(struct node));
+		nNode->n = to;
+		nNode->next = NULL;
+		temp->next = nNode;
+	}
+}
+
+int vmap[1001];
+void dfs(int n) {
+	printf("%d ", n);
+	vmap[n] = 1;
+	if (list[n] == NULL) return;
+	pnode temp = list[n];
+	while (temp != NULL) {
+		if (vmap[temp->n] != 1) dfs(temp->n);
+		temp = temp->next;
+	}
+}
+int v[1001];
+int q[1001];
+int qh, qr;
+void bfs(int n) {
+	v[n] = 1;
+	q[qh++] = n;
+	while (qh > qr) {
+		n = q[qr++];
+		printf("%d ", n);
+		pnode temp = list[n];
+		while (temp != NULL) {
+			if (v[temp->n] == 0) {
+				v[temp->n] = 1;
+				q[qh++] = temp->n;
+			}
+			temp = temp->next;
+		}
+	}
+}
+
+int main() {
+	int a, b;
+	freopen("data.txt", "r", stdin);
+	scanf("%d %d %d", &N,&M,&V);
+	for (int i = 1; i <= M; i++) {
+		scanf("%d %d", &a, &b);
+		addnode(a, b);
+		addnode(b, a);
+		//map[a][b] = 1;
+		//map[b][a] = 1;
+	}
+	dfs(V);
+	printf("\n");
+	bfs(V);
+	
+	return 0;
+}
+
+```
+
+
 ## Sort
 
 ### quick sort
