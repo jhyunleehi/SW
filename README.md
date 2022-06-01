@@ -1228,3 +1228,33 @@ int main() {
 	}
 }
 ```
+
+
+
+```c
+#include <stdio.h>
+int Y = 2009, M, D;
+int days;
+int month[12]={31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+char Days[7][15] = { "Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+int main() {
+	freopen("data.txt", "r", stdin);
+	scanf("%d %d", &D, &M);
+	for (int y = 1; y < Y; y++) {
+		if ((y % 4 == 0) && (y % 100 != 0) || (y % 400 == 0)) 
+			days += 366;
+		else 
+			days += 365;
+	}
+	
+	if ((Y % 4 == 0) && (Y % 100 != 0) || (Y % 400 == 0)) 
+		month[1] = 29;
+	for (int i = 0; i < M - 1; i++) days += month[i];
+	
+	days += D;
+	printf("%s\n", Days[days % 7]);
+		
+	return 0;
+}
+
+```
