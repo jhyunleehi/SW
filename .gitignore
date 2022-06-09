@@ -1,3 +1,14 @@
+*.tlog
+*.log
+*.sln
+*.suo
+*.db
+*.ipch
+*.vcxproj
+*.filters
+*.user
+*.recipe
+
 # Prerequisites
 *.d
 

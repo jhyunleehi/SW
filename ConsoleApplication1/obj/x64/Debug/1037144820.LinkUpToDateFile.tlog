@@ -1,1 +1,0 @@
-g++ -o "/home/good/projects/ConsoleApplication1/bin/x64/Debug/ConsoleApplication1.out" -Wl,--no-undefined -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack /home/good/projects/ConsoleApplication1/obj/x64/Debug/main.o

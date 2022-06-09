@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "(gdb) 시작",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {"text": "-enable-pretty-printing","ignoreFailures": true},
+                {"text": "-gdb-set disassembly-flavor intel","ignoreFailures": true},
+                {"text": "handle SIGPIPE nostop noprint pass","ignoreFailures": true}
+            ]
+        },
+        {
+            "type": "gdb",
+            "request": "launch",
+            "name": "Launch Program",
+            "target": "${fileDirname}/${fileBasenameNoExtension}",
+            "cwd": "${fileDirname}",
+            "valuesFormatting": "parseText",
+            "stopAtEntry": true,
+        },
+    ]
+}
