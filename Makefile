@@ -21,7 +21,7 @@ OBJS = $(SRCS:.c=.o)
 OBJECTS = $(patsubst %.o,$(OBJ_DIR)/%.o,$(OBJS))
 DEPS = $(OBJECTS:.o=.d)
 
-all: rcall
+all: 4635
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cc
 	$(CC) $(CFLAGS) -c $< -o $@ -MD $(LDFLAGS)
