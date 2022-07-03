@@ -1329,3 +1329,90 @@ int main()
     printf("%d", ans);
 }
 ```
+
+
+
+## 출력시간 단축
+
+#### 문장변환 출력
+
+#### 1. case:  매핑 테이블 이용
+* 380ms 512B
+
+```c
+#include <stdio.h>
+int AB[26];
+int BA[26];
+int T,a,b;
+char s1[1<<20];
+void build(int a,int b){
+    int temp=0;
+    for (int i=0;i<26; i++){        
+        temp = (a*i+b)%26;
+        AB[i] =temp;
+        BA[temp] =i;
+    }
+}
+int main()
+{    
+    scanf("%d", &T) ;
+    for (int i = T; i; i--){
+        scanf("%d %d",&a,&b);
+        scanf("%s",s1);
+        build(a,b);
+        for (int j=0;s1[j]; j++){
+            char c=s1[j]-'A';
+            printf("%c", AB[c]+'A');
+        }
+        printf("\n");
+    }    
+}
+```
+#### 2. case: puts 함수 이용
+* 144ms 464B
+```c
+#include <stdio.h>
+int AB[26];
+int T,a,b;
+char s1[1<<20];
+void build(int a,int b){
+    int temp=0;
+    for (int i=0;i<26; i++){        
+        temp = (a*i+b)%26;
+        AB[i] =temp;        
+    }
+}
+int main()
+{   
+    scanf("%d", &T) ;
+    for (int i = T; i; i--){
+        scanf("%d %d",&a,&b);
+        scanf("%s",s1);
+        build(a,b);
+        for (int j=0;s1[j]; j++){            
+            s1[j]= AB[s1[j]-'A']+'A';
+        }
+        puts(s1);
+    }    
+}
+```
+
+#### 3. case: no map table
+* 132ms 307B
+```c
+#include <stdio.h>
+int T,a,b;
+char s1[1<<20];
+int main()
+{       
+    scanf("%d", &T) ;
+    for (int i = T; i; i--){
+        scanf("%d %d",&a,&b);
+        scanf("%s",s1);    
+        for (int j=0;s1[j]; j++){            
+            s1[j]= (a*(s1[j]-'A')+b)%26 + 'A';
+        }
+        puts(s1);
+    }    
+}
+```
