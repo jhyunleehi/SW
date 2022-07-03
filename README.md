@@ -679,6 +679,46 @@ int main() {
 	return 0;
 }
 ```
+### string 포함된 배열 qsort
+
+```c
+#include <stdio.h>
+typedef struct item {
+    char name[21];
+    int w;
+};
+struct item data[101];
+int T,N;
+void qsort(int L, int R){
+    int p=L,q=R,v=data[(L+R)/2].w;
+    while(p<q){
+        while(v < data[p].w) p++;
+        while(v > data[q].w) q--;
+        if (p<=q){
+            struct item temp = data[p];
+            data[p] = data[q];
+            data[q] = temp;
+            p++; q--;
+        }
+    }
+    if (q>L) qsort(L,q);
+    if (p<R) qsort(p,R);
+}
+
+int main(){
+    freopen("data.txt", "r", stdin);
+    scanf("%d",&T);        
+    for (int i = T; i; i--){
+        scanf("%d", &N);
+        for (int j=0; j<N; j++) scanf("%s %d", data[j].name,&data[j].w);     
+        qsort(0,N-1);
+        printf("%s\n",data[0].name);
+    }     
+}
+```
+
+
+
 
 ## 이분탐색
 
@@ -1257,4 +1297,35 @@ int main() {
 	return 0;
 }
 
+```
+
+
+## 수열
+
+### 수열
+
+```c
+#include <stdio.h>
+int N,ans;
+int a[5];
+void call(int n, int step) {
+    a[step]=n;
+    if (step ==4){
+        ans++;
+        for (int i=1; i<=4; i++) printf("[%d]", a[i]);
+        printf("\n");
+        return;
+    }
+    for (int i=n-1; i>=1; i--){
+        call(i, step+1);
+    }
+}
+
+int main()
+{
+    freopen("data.txt", "r", stdin);
+    scanf("%d",&N);
+    call(N+1,0);
+    printf("%d", ans);
+}
 ```
