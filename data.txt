@@ -1,17 +1,2 @@
-#include<stdio.h>
-double t,p;
-double pps;
-double ans;
-int main(){
-    scanf("%lf %lf", &t,&p);    
-    int pb=0;
-    if (p>=20) {        
-        pps=(100-p)/t;
-        ans=(p-20)/pps + 20/(pps/2);        
-    }else {
-        int usep = (20-p);
-        pps = (80+(usep*2))/t;
-        ans = p/(pps/2);        
-    }
-    printf("%.5lf\n",ans);        
-}
+525 974
+13 985
