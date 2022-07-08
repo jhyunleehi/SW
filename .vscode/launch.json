@@ -1,5 +1,5 @@
 {
-    "configurations": [        
+    "configurations": [                
         {
             "name": "(gdb) 시작",
             "type": "cppdbg",
