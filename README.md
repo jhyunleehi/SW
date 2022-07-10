@@ -1483,3 +1483,78 @@ int main(){
     return 0;
 }
 ```
+
+#### 이진수 변환
+```c
+#include <stdio.h>
+int main() {
+	int i = 0, d[50];
+	long long n;
+	scanf("%lld", &n);
+	while (n) {
+		if (n % 2) d[i++] = 1;
+		else d[i++] = 0;
+		n /= 2;
+	}
+	while (i--)
+		printf("%d", d[i]);
+	return 0;
+}
+```
+
+#### 이진수 곱셈
+```c
+#include <stdio.h>
+char s1[1<<5], s2[1<<5];
+long long a,t;
+int ans[64];
+int main(){    
+    freopen("data.txt","r",stdin);
+    scanf("%s %s", s1,s2);
+    for(int i=0; s1[i]; i++){
+        a=a<<1;
+        a+=(s1[i]-'0');
+    }
+    int len=0;
+    for(int i=0; s2[i]; i++) len++;
+    for ( int i=len-1, j=0; i>=0; i--, j++){
+        if (s2[i]=='1') {
+            t+=a<<j;
+        }
+    }
+    for (int i=63; i>=0; i--){
+        if (t&1==1) ans[i]=1;
+        else ans[i] =0;
+        t=t>>1;
+    }
+    int start=0;
+    for (int i=0; i<64; i++){
+        if (ans[i]==1) start=1;
+        if (start) printf("%d", ans[i]);
+    }
+}
+```
+
+#### scanf에서 '\n' 문자 까지 읽기 
+```c
+#include<stdio.h>
+
+char st[111];
+int main(){
+	int n, t, i;
+	for(scanf("%d\n",&n);n--;){
+		gets(st);
+		for(i=t=0;st[i];i++){
+			if('a'<=st[i]&&st[i]<='z')t|=1<<(st[i]-'a');
+			if('A'<=st[i]&&st[i]<='Z')t|=1<<(st[i]-'A');
+		}
+		if(t==(1<<26)-1)puts("pangram");
+		else{
+			printf("missing ");
+			for(i=0;i<26;i++)if((t&(1<<i))==0)putchar('a'+i);
+			puts("");
+		}
+	}
+	return 0;
+}
+```
