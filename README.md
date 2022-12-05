@@ -260,6 +260,19 @@ int main(){
 }
 
 ```
+### 큰수 나누기
+https://www.acmicpc.net/problem/14928
+```
+#include<stdio.h>
+char S[1000010];
+int ans;
+int main() {	
+	fgets(S, 1000010, stdin);
+	for (int i=0; S[i]!='\n'; i++) ans = ((ans*10) +S[i] - '0') % 20000303;
+	printf("%d", ans);
+}
+```
+
 
 ## string
 
