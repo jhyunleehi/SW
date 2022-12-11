@@ -1539,7 +1539,7 @@ int main(){
 
 #### 큰수 나누기
 https://www.acmicpc.net/problem/14928
-```
+```c
 #include<stdio.h>
 char S[1000010];
 int ans;
@@ -1572,4 +1572,23 @@ int main(){
 	}
 	return 0;
 }
+```
+
+### struct 선언 방법
+#### typedef 
+* struct typedef : 구조체의 이름 앞에는 관례상 `_`를 접두사로 사용
+* struct pointer를 사용할 때 표현 단순화 
+```
+typedef struct _Person {
+	char name[20];
+	int age;
+	char address[100];
+} Person;
+
+typedef struct _Person* pPerson;
+```
+typedef struct _DP* pdp;
+typedef struct _DP {
+	int v, k;
+} DP;
 ```
