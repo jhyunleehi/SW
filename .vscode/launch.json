@@ -6,7 +6,7 @@
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [],
-            "stopAtEntry": false,
+            "stopAtEntry": true,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
@@ -25,7 +25,11 @@
             ]
         },
         {
+<<<<<<< HEAD
             "name": "nativ gdb",
+=======
+            "name": "native gdb",
+>>>>>>> d8799855652d702c83a35b47528a58a87226c2ba
             "type": "gdb",
             "request": "launch",
             "target": "${fileDirname}/${fileBasenameNoExtension}",
