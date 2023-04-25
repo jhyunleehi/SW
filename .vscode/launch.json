@@ -1,6 +1,15 @@
 {
     "configurations": [
         {
+            "name": "native gdb",
+            "type": "gdb",
+            "request": "launch",
+            "target": "${fileDirname}/${fileBasenameNoExtension}",
+            "cwd": "${fileDirname}",
+            "valuesFormatting": "parseText",
+            "stopAtEntry": true,
+        },
+        {
             "name": "cpp gdb",
             "type": "cppdbg",
             "request": "launch",
@@ -23,19 +32,6 @@
                     "ignoreFailures": true
                 }
             ]
-        },
-        {
-<<<<<<< HEAD
-            "name": "nativ gdb",
-=======
-            "name": "native gdb",
->>>>>>> d8799855652d702c83a35b47528a58a87226c2ba
-            "type": "gdb",
-            "request": "launch",
-            "target": "${fileDirname}/${fileBasenameNoExtension}",
-            "cwd": "${fileDirname}",
-            "valuesFormatting": "parseText",
-            "stopAtEntry": true,
-        },
+        }
     ]
 }
