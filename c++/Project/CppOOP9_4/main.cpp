@@ -17,7 +17,7 @@ void print()
 struct Item
 {
     int power;
-    constexpr Item(int power) : power(power)  
+    constexpr Item(int power) : power(power)  // constexpr »ý¼ºÀÚ
     {
 
     }
@@ -32,7 +32,7 @@ struct Item
 template<typename T>
 auto getValue(T t)
 {
-    if constexpr (std::is_pointer<T>()) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
+    if constexpr (std::is_pointer<T>()) // ÄÄÆÄÀÏ ½Ã°£¿¡ Æò°¡ µÊ
         return *t;
     else
         return t;
@@ -40,22 +40,22 @@ auto getValue(T t)
 
 int main()
 {
-    constexpr int value = fib(10); // fibï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½.
+    constexpr int value = fib(10); // fib°¡ »ó¼ö ½Ã°£¿¡ ¿¬»êÀÌ µÇÁö ¾Ê´Â´Ù¸é ÄÄÆÄÀÏ ¿¡·¯ ¹ß»ý.
     std::cout << value << std::endl;
 
-    // ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½ valueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½
+    // ¹è¿­ ¼±¾ð¿¡ value°¡ »ç¿ëµÈ °ÍÀ¸·Î º¸¾Æ ÄÄÆÄÀÏ ½Ã°£¿¡ Æò°¡ µÇ¾ú´Ù
     int nums[value];
 
-    // ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ non type ï¿½Ä¶ï¿½ï¿½ï¿½Í¿ï¿½ valueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½.
+    // ÅÛÇÃ¸´ÀÇ non type ÆÄ¶ó¸ÞÅÍ¿¡ value°¡ »ç¿ëµÈ °ÍÀ¸·Î º¸¾Æ ÄÄÆÄÀÏ ½Ã°£¿¡ Æò°¡ µÇ¾ú´Ù.
     print<value>();
 
 
-    // ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
+    // »ó¼ö½Ã°£¿¡ Æò°¡ µÊ
     constexpr Item item0(10);
     constexpr Item item1(20);
     constexpr Item newItem = item0 + item1;
 
-    // ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Æ±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    // »ó¼ö½Ã°£¿¡ Æò°¡ µÆ±â ¶§¹®¿¡ ¹è¿­ »ý¼º °¡´É
     int nums1[newItem.power];
 
 
@@ -66,9 +66,9 @@ int main()
     std::cout << getValue(pNum) << std::endl;
 
 
-    auto func = [](int y) { // C++17ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¿ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ constexprï¿½ï¿½ ï¿½Ù¾ï¿½ ï¿½ï¿½ï¿½ï¿½
+    auto func = [](int y) { // C++17ºÎÅÍ ¶÷´Ù¿¡ ¾Ï½ÃÀûÀ¸·Î constexprÀÌ ºÙ¾î ÀÖÀ½
         return y;
     };
 
-    int nums0[func(10)]; // ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
+    int nums0[func(10)]; // ¶÷´Ù°¡ »ó¼ö½Ã°£¿¡ Æò°¡ µÊ
 }

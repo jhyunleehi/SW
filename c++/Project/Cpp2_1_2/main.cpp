@@ -1,6 +1,6 @@
 #include <iostream>
 #include <numeric> // 최대값, 최소값을 보기 위해 포함
-#include <limits>
+
 // std 네임 스페이스를 명시하지 않아도 사용할 수 있도록 하기 위함
 using namespace std;
 
@@ -86,7 +86,7 @@ int main()
     {
         // unsigned의 최대값
         // char 형이기 때문에 cout이 숫자로 출력을 하지 않아 (int)로 형변환
-        cout << numeric_limits<uint8_t>::max() << endl;
+        cout << (int)numeric_limits<uint8_t>::max() << endl;
         cout << numeric_limits<uint16_t>::max() << endl;
         cout << numeric_limits<uint32_t>::max() << endl;
         cout << numeric_limits<uint64_t>::max() << endl;
