@@ -261,6 +261,8 @@ int main(){
 
 ```
 
+
+
 ## string
 
 ### strcmp strcpy
@@ -679,6 +681,46 @@ int main() {
 	return 0;
 }
 ```
+### string 포함된 배열 qsort
+
+```c
+#include <stdio.h>
+typedef struct item {
+    char name[21];
+    int w;
+};
+struct item data[101];
+int T,N;
+void qsort(int L, int R){
+    int p=L,q=R,v=data[(L+R)/2].w;
+    while(p<q){
+        while(v < data[p].w) p++;
+        while(v > data[q].w) q--;
+        if (p<=q){
+            struct item temp = data[p];
+            data[p] = data[q];
+            data[q] = temp;
+            p++; q--;
+        }
+    }
+    if (q>L) qsort(L,q);
+    if (p<R) qsort(p,R);
+}
+
+int main(){
+    freopen("data.txt", "r", stdin);
+    scanf("%d",&T);        
+    for (int i = T; i; i--){
+        scanf("%d", &N);
+        for (int j=0; j<N; j++) scanf("%s %d", data[j].name,&data[j].w);     
+        qsort(0,N-1);
+        printf("%s\n",data[0].name);
+    }     
+}
+```
+
+
+
 
 ## 이분탐색
 
@@ -1257,4 +1299,296 @@ int main() {
 	return 0;
 }
 
+```
+
+
+## 수열
+
+### 수열
+
+```c
+#include <stdio.h>
+int N,ans;
+int a[5];
+void call(int n, int step) {
+    a[step]=n;
+    if (step ==4){
+        ans++;
+        for (int i=1; i<=4; i++) printf("[%d]", a[i]);
+        printf("\n");
+        return;
+    }
+    for (int i=n-1; i>=1; i--){
+        call(i, step+1);
+    }
+}
+
+int main()
+{
+    freopen("data.txt", "r", stdin);
+    scanf("%d",&N);
+    call(N+1,0);
+    printf("%d", ans);
+}
+```
+
+
+
+## 출력시간 단축
+
+#### 문장변환 출력
+
+#### 1. case:  매핑 테이블 이용
+* 380ms 512B
+
+```c
+#include <stdio.h>
+int AB[26];
+int BA[26];
+int T,a,b;
+char s1[1<<20];
+void build(int a,int b){
+    int temp=0;
+    for (int i=0;i<26; i++){        
+        temp = (a*i+b)%26;
+        AB[i] =temp;
+        BA[temp] =i;
+    }
+}
+int main()
+{    
+    scanf("%d", &T) ;
+    for (int i = T; i; i--){
+        scanf("%d %d",&a,&b);
+        scanf("%s",s1);
+        build(a,b);
+        for (int j=0;s1[j]; j++){
+            char c=s1[j]-'A';
+            printf("%c", AB[c]+'A');
+        }
+        printf("\n");
+    }    
+}
+```
+#### 2. case: puts 함수 이용
+* 144ms 464B
+```c
+#include <stdio.h>
+int AB[26];
+int T,a,b;
+char s1[1<<20];
+void build(int a,int b){
+    int temp=0;
+    for (int i=0;i<26; i++){        
+        temp = (a*i+b)%26;
+        AB[i] =temp;        
+    }
+}
+int main()
+{   
+    scanf("%d", &T) ;
+    for (int i = T; i; i--){
+        scanf("%d %d",&a,&b);
+        scanf("%s",s1);
+        build(a,b);
+        for (int j=0;s1[j]; j++){            
+            s1[j]= AB[s1[j]-'A']+'A';
+        }
+        puts(s1);
+    }    
+}
+```
+
+#### 3. case: no map table
+* 132ms 307B
+```c
+#include <stdio.h>
+int T,a,b;
+char s1[1<<20];
+int main()
+{       
+    scanf("%d", &T) ;
+    for (int i = T; i; i--){
+        scanf("%d %d",&a,&b);
+        scanf("%s",s1);    
+        for (int j=0;s1[j]; j++){            
+            s1[j]= (a*(s1[j]-'A')+b)%26 + 'A';
+        }
+        puts(s1);
+    }    
+}
+```
+
+
+### big number
+
+```c
+#include <stdio.h>
+char a[1020], b[1020], c[1020];
+int main(){    
+    freopen("data.txt","r",stdin);
+    scanf("%s", a);
+    int len=0;
+    for (int i=0; a[i]; i++) len++;
+    b[0]='0';
+    int i=1; 
+    for (int j=0; a[j];j++){b[i++]=a[j]; }
+    for (int j=0; j<4; j++) b[i++]='0'; // <<4
+
+    
+    for (int i=len+5; i>=0; i--){
+        if ((i-5)>=0){
+            c[i] = ((a[i-5]-'0')+(b[i]-'0')) + '0';
+        }else{
+            c[i] = b[i];
+        }
+    }
+    c[len+5]='\0';
+
+    for (int i=len+5; i>=1; i--){
+        if (c[i] =='2') {
+            c[i] ='0';
+            c[i-1] = (c[i-1]-'0' +1)+'0';
+        } 
+        if (c[i] =='3') {
+            c[i] ='1';
+            c[i-1] = (c[i-1]-'0' +1)+'0';
+        } 
+    }    
+    int start =0;
+    for (int i=0;c[i]; i++){
+        if (c[i]=='1') start=1;
+        if (start)  printf("%c",c[i]);    
+    }    
+}
+```
+
+```c
+#include <cstdio>
+#include <cstring>
+using namespace std;
+int main(){
+    char num[1001];
+    char ret[1011];
+    for( int i = 0 ; i < 10 ; ++i ) ret[i] = '0';
+    scanf("%s", num);
+    memcpy(ret+4, num, sizeof(num));
+    int idx = (int)strlen(num)-1;
+    int carry = 0;
+    for( ; idx >= 0 ; --idx){
+        int a = ret[idx]-'0', b = num[idx]-'0';
+        ret[idx] = (a+b+carry)%2+'0';
+        carry = a+b+carry > 1;
+    }
+    if( carry ) printf("1");
+    printf("%s", ret);
+    return 0;
+}
+```
+
+#### 이진수 변환
+```c
+#include <stdio.h>
+int main() {
+	int i = 0, d[50];
+	long long n;
+	scanf("%lld", &n);
+	while (n) {
+		if (n % 2) d[i++] = 1;
+		else d[i++] = 0;
+		n /= 2;
+	}
+	while (i--)
+		printf("%d", d[i]);
+	return 0;
+}
+```
+
+#### 이진수 곱셈
+```c
+#include <stdio.h>
+char s1[1<<5], s2[1<<5];
+long long a,t;
+int ans[64];
+int main(){    
+    freopen("data.txt","r",stdin);
+    scanf("%s %s", s1,s2);
+    for(int i=0; s1[i]; i++){
+        a=a<<1;
+        a+=(s1[i]-'0');
+    }
+    int len=0;
+    for(int i=0; s2[i]; i++) len++;
+    for ( int i=len-1, j=0; i>=0; i--, j++){
+        if (s2[i]=='1') {
+            t+=a<<j;
+        }
+    }
+    for (int i=63; i>=0; i--){
+        if (t&1==1) ans[i]=1;
+        else ans[i] =0;
+        t=t>>1;
+    }
+    int start=0;
+    for (int i=0; i<64; i++){
+        if (ans[i]==1) start=1;
+        if (start) printf("%d", ans[i]);
+    }
+}
+```
+
+#### 큰수 나누기
+https://www.acmicpc.net/problem/14928
+```c
+#include<stdio.h>
+char S[1000010];
+int ans;
+int main() {	
+	fgets(S, 1000010, stdin);
+	for (int i=0; S[i]!='\n'; i++) ans = ((ans*10) +S[i] - '0') % 20000303;
+	printf("%d", ans);
+}
+```
+
+#### scanf에서 '\n' 문자 까지 읽기 
+```c
+#include<stdio.h>
+
+char st[111];
+int main(){
+	int n, t, i;
+	for(scanf("%d\n",&n);n--;){
+		gets(st);
+		for(i=t=0;st[i];i++){
+			if('a'<=st[i]&&st[i]<='z')t|=1<<(st[i]-'a');
+			if('A'<=st[i]&&st[i]<='Z')t|=1<<(st[i]-'A');
+		}
+		if(t==(1<<26)-1)puts("pangram");
+		else{
+			printf("missing ");
+			for(i=0;i<26;i++)if((t&(1<<i))==0)putchar('a'+i);
+			puts("");
+		}
+	}
+	return 0;
+}
+```
+
+### struct 선언 방법
+#### typedef 
+* struct typedef : 구조체의 이름 앞에는 관례상 `_`를 접두사로 사용
+* struct pointer를 사용할 때 표현 단순화 
+```
+typedef struct _Person {
+	char name[20];
+	int age;
+	char address[100];
+} Person;
+
+typedef struct _Person* pPerson;
+```
+typedef struct _DP* pdp;
+typedef struct _DP {
+	int v, k;
+} DP;
 ```
