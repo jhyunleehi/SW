@@ -8,6 +8,8 @@
 *.filters
 *.user
 *.recipe
+*.log
+*.exe
 
 # Prerequisites
 *.d
