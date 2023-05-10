@@ -1,18 +1,28 @@
 ﻿#include <stdio.h>
 
-int N, M[1001],K[1001],ans;
+int R, C, ZR, ZC;
+char S[51][51];
+char M[255][255];
 int main()
 {
     freopen("data.txt", "r", stdin);
-    scanf("%d", &N);
-    for (int i = 1; i <= N; ++i)  scanf("%d", &M[i]);
-    for (int i = 2; i <= N; ++i) {    
-        if (M[i - 1] < M[i])     {
-            K[i] = K[i - 1] + (M[i] - M[i - 1]);
-        }else {
-            K[i] = 0;
+    scanf("%d %d %d %d", &R,&C,&ZR,&ZC);
+    for (int i = 0; i < R; i++) {
+        scanf("%s", S[i]);
+    }
+    for (int r = 0; r < R; ++r) {
+        for (int c = 0; c < C; ++c) {
+            for (int y = 0; y < ZR; ++y) {
+                for (int x = 0; x < ZC; ++x) {
+                    M[r*ZR + y][c*ZC + x] = S[r][c];
+                }
+            }
         }
-        ans = (ans < K[i]) ? K[i] : ans;
-    }    
-    printf("%d\n", ans);
+    }
+    for (int r = 0; r < R*ZR; ++r) {
+        for (int c = 0; c < C*ZC; ++c) {
+            printf("%c", M[r][c]);
+        }
+        printf("\n");
+    }
 }
