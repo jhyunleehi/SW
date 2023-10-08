@@ -1,0 +1,5 @@
+﻿  9094.cpp
+D:\Code\SW\BJ\9094\9094.cpp(6,5): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Code\SW\BJ\9094\9094.cpp(7,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Code\SW\BJ\9094\9094.cpp(10,9): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  9094.vcxproj -> D:\Code\SW\BJ\Debug\9094.exe
